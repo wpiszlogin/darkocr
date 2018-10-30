@@ -42,10 +42,7 @@ def find_random_indexes(data_y, char, count):
     return np.random.choice(char_args, count)
 
 
-def show_all_chars(data_x, data_y):
-    examples_count = 10
-    do_decode = True
-
+def show_all_chars(data_x, data_y, do_decode=True, examples_count=10):
     col = 0
     plt.figure(figsize=(20, 9))
     plt.subplots_adjust(left=0.01, right=0.99, top=0.99, bottom=0.01)
@@ -69,11 +66,7 @@ def show_all_chars(data_x, data_y):
     plt.show()
 
 
-def show_chars_data(data_x, data_y, char=None):
-    cols_count = 27
-    rows_count = 10
-    do_decode = True
-
+def show_chars_data(data_x, data_y, char=None, do_decode=True, cols_count=27, rows_count=10):
     char_indexes = []
     if char is not None:
         char_indexes = find_random_indexes(data_y, char, cols_count * rows_count)
@@ -92,7 +85,23 @@ def show_chars_data(data_x, data_y, char=None):
         plt.xticks([])
         plt.yticks([])
     fig = plt.gcf()
-    fig.canvas.set_window_title('Characters data')
+    if char is not None:
+        fig.canvas.set_window_title('Random data of label={} ({})'.format(char, str(decode(char))))
+    else:
+        fig.canvas.set_window_title('Continuous data set from beginning')
+    plt.show()
+
+
+def data_histogram(data_y):
+    data = [i[0] for i in train_y]
+    plt.figure(figsize=(12, 4))
+    plt.hist(data, bins=range(labels_count + 1), edgecolor='black', facecolor='blue', align='left')
+    plt.xticks(range(labels_count))
+    plt.xlabel('Labels')
+    plt.ylabel('Count')
+    plt.title('Histogram of data set')
+    fig = plt.gcf()
+    fig.canvas.set_window_title('Histogram of data set')
     plt.show()
 
 
@@ -102,3 +111,5 @@ train_x, train_y = read_data('train_data/train.pkl')
 show_all_chars(train_x, train_y)
 show_chars_data(train_x, train_y)
 show_chars_data(train_x, train_y, char=encode('p'))
+# statistics
+data_histogram(train_y)

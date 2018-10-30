@@ -4,6 +4,11 @@ import matplotlib.pyplot as plt
 
 labels_count = 36
 image_dim = 56
+decoding_list = [
+    '6', 'P', '0', 'V', 'W', '3', 'A', '8', 'T', '1',
+    '0', '9', 'H', 'R', 'N', '7', 'K', 'L', 'G', '4',
+    'Y', 'C', 'E', 'J', '5', 'I', 'S', '2', 'F', 'Z',
+    'N', 'Q', 'M', 'B', 'D', 'U']
 
 
 def predict(input_data):
@@ -18,19 +23,18 @@ def read_data(path):
         return train_data
 
 
+def encode(char):
+    return decoding_list.index(char.upper())
+
+
 def decode(char_i, do_decode=True):
-    decoding_list = [
-        '6', 'P', '0', 'V', 'W', '3', 'A', '8', 'T', '1',
-        '0', '9', 'H', 'R', 'N', '7', 'K', 'L', 'G', '4',
-        'Y', 'C', 'E', 'J', '5', 'I', 'S', '2', 'F', 'Z',
-        'N', 'Q', 'M', 'B', 'D', 'U']
     if do_decode:
         return decoding_list[char_i]
     else:
         return char_i
 
 
-def find_indexes(data_y, char, count):
+def find_random_indexes(data_y, char, count):
     # find indexes where label == char
     char_args = np.argwhere(data_y == char)
     char_args = [i for i, j in char_args]
@@ -46,7 +50,7 @@ def show_all_chars(data_x, data_y):
     plt.figure(figsize=(20, 9))
     plt.subplots_adjust(left=0.01, right=0.99, top=0.99, bottom=0.01)
     for char in range(labels_count):
-        char_indexes = find_indexes(data_y, char, examples_count)
+        char_indexes = find_random_indexes(data_y, char, examples_count)
         # show them
         row = 0
         for label_index in char_indexes:
@@ -62,6 +66,7 @@ def show_all_chars(data_x, data_y):
         col += 1
     fig = plt.gcf()
     fig.canvas.set_window_title('All characters')
+    plt.show()
 
 
 def show_chars_data(data_x, data_y, char=None):
@@ -71,7 +76,7 @@ def show_chars_data(data_x, data_y, char=None):
 
     char_indexes = []
     if char is not None:
-        char_indexes = find_indexes(data_y, char, cols_count * rows_count)
+        char_indexes = find_random_indexes(data_y, char, cols_count * rows_count)
 
     plt.figure(figsize=(20, 11))
     plt.subplots_adjust(left=0.01, right=0.99, top=0.99, bottom=0.01)
@@ -88,16 +93,12 @@ def show_chars_data(data_x, data_y, char=None):
         plt.yticks([])
     fig = plt.gcf()
     fig.canvas.set_window_title('Characters data')
+    plt.show()
 
 
 # reading data
-train_x, train_y = read_data("train_data/train.pkl")
+train_x, train_y = read_data('train_data/train.pkl')
+# visualization
 show_all_chars(train_x, train_y)
-show_chars_data(train_x, train_y, char=0)
-
-
-
-
-
-
-
+show_chars_data(train_x, train_y)
+show_chars_data(train_x, train_y, char=encode('p'))

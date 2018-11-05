@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="64bc8ad6-d65d-44cf-a438-5a39ad3e2218" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/predict.py" beforeDir="false" afterPath="$PROJECT_DIR$/predict.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -14,10 +15,10 @@
     <session id="-2114582067">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="1" />
+          <entry key="project.closed" value="2" />
           <entry key="project.open.time.0" value="1" />
-          <entry key="project.open.time.3" value="1" />
-          <entry key="project.opened" value="2" />
+          <entry key="project.open.time.3" value="2" />
+          <entry key="project.opened" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -36,17 +37,17 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="Python Console" value="863" />
+          <entry key="Python Console" value="4237" />
           <entry key="dummy" value="3" />
           <entry key="md" value="3" />
-          <entry key="py" value="1954" />
+          <entry key="py" value="4585" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="Markdown" value="3" />
           <entry key="PLAIN_TEXT" value="3" />
-          <entry key="Python" value="2817" />
+          <entry key="Python" value="8822" />
         </counts>
       </usages-collector>
     </session>
@@ -56,12 +57,13 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/predict.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="385">
-              <caret line="97" column="98" selection-start-line="97" selection-start-column="98" selection-end-line="97" selection-end-column="98" />
+            <state relative-caret-position="136">
+              <caret line="269" lean-forward="true" selection-start-line="269" selection-end-line="269" />
               <folding>
-                <element signature="e#0#13#0" expanded="true" />
-                <marker date="1540895502520" expanded="true" signature="364:365" ph="..." />
-                <marker date="1540895502520" expanded="true" signature="2931:3282" ph="..." />
+                <element signature="e#0#15#0" expanded="true" />
+                <marker date="1541391900699" expanded="true" signature="727:728" ph="..." />
+                <marker date="1541391900699" expanded="true" signature="1288:1400" ph="..." />
+                <marker date="1541391900699" expanded="true" signature="4676:4957" ph="..." />
               </folding>
             </state>
           </provider>
@@ -82,7 +84,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/matplotlib/text.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="20332">
+            <state relative-caret-position="586">
               <caret line="1211" column="18" selection-start-line="1211" selection-start-column="18" selection-end-line="1211" selection-end-column="18" />
             </state>
           </provider>
@@ -102,12 +104,14 @@
       <find>10</find>
       <find>char</find>
       <find>i</find>
-      <find>i</find>
       <find>im_dim</find>
       <find>count</find>
+      <find>data_histogram</find>
+      <find>classes_count</find>
     </findStrings>
     <replaceStrings>
       <replace>image_dim</replace>
+      <replace>show_data_histogram</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -124,8 +128,9 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="683" />
-    <option name="width" value="854" />
+    <option name="x" value="502" />
+    <option name="y" value="98" />
+    <option name="width" value="1089" />
     <option name="height" value="1017" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -134,6 +139,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -145,7 +151,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="RunDashboard">
@@ -201,6 +206,15 @@
     </task>
     <servers />
   </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1696" height="1026" extended-state="6" />
     <editor active="true" />
@@ -210,15 +224,15 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.2780269" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32847533" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.18049328" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39910313" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.3295964" />
       <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.3295964" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Python Console" order="10" visible="true" weight="0.25112107" />
+      <window_info active="true" anchor="bottom" id="Python Console" order="10" visible="true" weight="0.2825112" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -237,7 +251,7 @@
     </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/matplotlib/text.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="20332">
+        <state relative-caret-position="586">
           <caret line="1211" column="18" selection-start-line="1211" selection-start-column="18" selection-end-line="1211" selection-end-column="18" />
         </state>
       </provider>
@@ -254,12 +268,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/predict.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="385">
-          <caret line="97" column="98" selection-start-line="97" selection-start-column="98" selection-end-line="97" selection-end-column="98" />
+        <state relative-caret-position="136">
+          <caret line="269" lean-forward="true" selection-start-line="269" selection-end-line="269" />
           <folding>
-            <element signature="e#0#13#0" expanded="true" />
-            <marker date="1540895502520" expanded="true" signature="364:365" ph="..." />
-            <marker date="1540895502520" expanded="true" signature="2931:3282" ph="..." />
+            <element signature="e#0#15#0" expanded="true" />
+            <marker date="1541391900699" expanded="true" signature="727:728" ph="..." />
+            <marker date="1541391900699" expanded="true" signature="1288:1400" ph="..." />
+            <marker date="1541391900699" expanded="true" signature="4676:4957" ph="..." />
           </folding>
         </state>
       </provider>

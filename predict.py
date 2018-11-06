@@ -1,5 +1,6 @@
 import operator
 import random
+import os
 
 import pickle
 from PIL import Image, ImageFilter
@@ -46,9 +47,13 @@ def save_array_to_png(a, path):
     im.save(path)
 
 
-def save_arrays_to_png(data_x, data_y, path='train_data/png/'):
+def save_dataset_to_png(data_x, data_y, path='train_data/png/'):
     for i in range(len(data_x)):
-        save_array_to_png(data_x[i], path+str(i)+'_'+str(data_y[i])+'.png')
+        final_path = path + data_y[i] + '/'
+        if not os.path.exists(final_path):
+            os.makedirs(final_path)
+
+        save_array_to_png(data_x[i], final_path+str(i)+'#'+str(data_y[i])+'.png')
 
 
 def encode(char):
@@ -181,11 +186,12 @@ class ErosImage(Operation):
         image_mod = []
         for im in image:
             r = random.randint(-self.max_erosion, self.max_dilation)
+            r_odd = abs(2 * r - 1)
             im_mod = im
             if r > 0:
-                im_mod = im.filter(ImageFilter.MaxFilter(3))
+                im_mod = im.filter(ImageFilter.MaxFilter(r_odd))
             elif r < 0:
-                im_mod = im.filter(ImageFilter.MinFilter(3))
+                im_mod = im.filter(ImageFilter.MinFilter(r_odd))
             image_mod.append(im_mod)
 
         return image_mod
@@ -235,37 +241,94 @@ class AutoresizeImage(Operation):
                     scal_factor = (1 - self.max_vertical_loss * random.random())
                     i2 = im.resize((im.width, int(scal_factor*im.height)))
 
-                im_mod.paste(i2, (int(im.width / 2 - i2.width / 2), int(im.height / 2 - i2.height / 2)))
+                im_mod.paste(i2, (int(im.width/2 - i2.width/2), int(im.height/2 - i2.height/2)))
 
             image_mod.append(im_mod)
 
         return image_mod
 
-p = Augmentor.Pipeline("train_data/aug/")
-p.add_operation(AutoresizeImage(probability=1, max_horizontal_loss=0.4, max_vertical_loss=0.2))
-p.sample(50)
+
+class ExpandImage(Operation):
+    def __init__(self, probability, width, height):
+        Operation.__init__(self, probability)
+        self.width = width
+        self.height = height
+
+    def perform_operation(self, image):
+        image_mod = []
+        for im in image:
+            # if no modifications
+            im_mod = im
+            if self.width > im.width and self.height > im.height:
+                im_mod = Image.new('L', (self.width, self.height))
+                im_mod.paste(im, (int(self.width/2 - im.width/2), int(self.height/2 - im.height/2)))
+
+            image_mod.append(im_mod)
+
+        return image_mod
+
+
+class AutoCropImage(Operation):
+    def __init__(self, probability, margin):
+        Operation.__init__(self, probability)
+        self.margin = margin
+
+    def perform_operation(self, image):
+        image_mod = []
+        for im in image:
+            # calc bounding box
+            bbox = im.getbbox()
+            # we need square dimension
+            max_dim = max(bbox[2] - bbox[0], bbox[3] - bbox[1])
+            min_dim = min(bbox[2] - bbox[0], bbox[3] - bbox[1])
+            margin = int(self.margin * max_dim)
+            diff = int((max_dim - min_dim) / 2)
+
+            crop_box = (
+                max(0, bbox[0] - margin),
+                max(0, bbox[1] - margin),
+                min(im.width, bbox[2] + margin),
+                min(im.height, bbox[3] + margin)
+            )
+            if diff > 0:
+                if bbox[2] - bbox[0] > bbox[3] - bbox[1]:
+                    crop_box = (
+                        max(0, bbox[0] - margin),
+                        max(0, bbox[1] - margin - diff),
+                        min(im.width, bbox[2] + margin),
+                        min(im.height, bbox[3] + margin + diff)
+                    )
+                else:
+                    crop_box = (
+                        max(0, bbox[0] - margin - diff),
+                        max(0, bbox[1] - margin),
+                        min(im.width, bbox[2] + margin + diff),
+                        min(im.height, bbox[3] + margin)
+                    )
+            im_mod = im.crop(crop_box)
+            image_mod.append(im_mod)
+
+        return image_mod
+
 
 # statistics for calculations
 labels_mean = calc_pixels_mean(train_x, train_y)
-
-p = Augmentor.Pipeline("train_data/aug/")
-p.add_operation(ErosImage(probability=0.5, max_erosion=1, max_dilation=1))
-p.random_distortion(1, 3, 3, 4)
-p.skew(1, 0.2)
-p.rotate_without_crop(probability=1, max_left_rotation=5, max_right_rotation=5)
-p.shear(1, 5, 5)
-p.add_operation(SmoothImage(probability=1))
-p.sample(50)
+temp_margin = 2.0
+final_margin = 0.05
+erosion_scaling = 4
 
 p = Augmentor.Pipeline("train_data/aug/")
 p.random_distortion(1, 2, 2, 8)
 p.add_operation(AutoresizeImage(probability=1, max_horizontal_loss=0.4, max_vertical_loss=0.2))
-p.rotate_without_crop(probability=1, max_left_rotation=7, max_right_rotation=7)
+p.add_operation(ExpandImage(probability=1, width=int(temp_margin*image_dim), height=int(temp_margin*image_dim)))
+p.rotate(probability=1, max_left_rotation=7, max_right_rotation=7)
 p.skew(1, 0.2)
-p.resize(1, 116, 116)
-p.add_operation(ErosImage(probability=0.5, max_erosion=1, max_dilation=1))
-p.resize(1, 56, 56)
-p.add_operation(SmoothImage(probability=1, blur=1, threshold=128))
+# p.shear(1, 5, 5)
+p.add_operation(AutoCropImage(probability=1, margin=final_margin))
+p.resize(1, int(erosion_scaling * image_dim), int(erosion_scaling * image_dim))
+p.add_operation(SmoothImage(probability=1, blur=2, threshold=128))
+p.add_operation(ErosImage(probability=1, max_erosion=4, max_dilation=4))
+p.resize(1, int(image_dim), int(image_dim))
 p.sample(50)
 
 # # testing model prototype

@@ -26,7 +26,6 @@ class ErosImage(Operation):
                 im_array = np.array(im)
                 im_pixels = np.sum(im_array)
                 thin_factor = (self.pixels_mean - im_pixels) / self.pixels_mean
-                print('{} VS {} final: {}'.format(self.pixels_mean, im_pixels, thin_factor))
                 r = r + int(3 * thin_factor)
 
             r_odd = abs(2 * r - 1)

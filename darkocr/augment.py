@@ -3,21 +3,32 @@ import random
 from PIL import Image, ImageFilter
 import Augmentor
 from Augmentor.Operations import Operation
+import numpy as np
 
 augment_path = 'train_data/aug/'
 
 
+# below classes extends Augmentor
 # erosion makes thinner line, dilation makes it thicker
 class ErosImage(Operation):
-    def __init__(self, probability, max_erosion, max_dilation):
+    def __init__(self, probability, max_erosion, max_dilation, pixels_mean=None):
         Operation.__init__(self, probability)
         self.max_erosion = max_erosion
         self.max_dilation = max_dilation
+        self.pixels_mean = pixels_mean
 
     def perform_operation(self, image):
         image_mod = []
         for im in image:
             r = random.randint(-self.max_erosion, self.max_dilation)
+            if self.pixels_mean is not None:
+                # calc mean of this image
+                im_array = np.array(im)
+                im_pixels = np.sum(im_array)
+                thin_factor = (self.pixels_mean - im_pixels) / self.pixels_mean
+                print('{} VS {} final: {}'.format(self.pixels_mean, im_pixels, thin_factor))
+                r = r + int(3 * thin_factor)
+
             r_odd = abs(2 * r - 1)
             im_mod = im
             if r > 0:
@@ -65,7 +76,7 @@ class AutoresizeImage(Operation):
             margin_tol = 0.15
             horiz_margin_tol = margin_tol * im.width
             vert_margin_tol = margin_tol * im.height
-            # modify if object covers almost all picture
+            # modify if object covers whole picture
             if bbox[0] < horiz_margin_tol and bbox[1] < vert_margin_tol and im.width - bbox[2] < horiz_margin_tol and im.height - bbox[3] < vert_margin_tol:
                 # here image will be paste
                 im_mod = Image.new('L', (im.width, im.height))
@@ -152,7 +163,7 @@ class AutoCropImage(Operation):
 
 
 # process folder containing png images
-def augment_folder(path=augment_path, generated_count=50, pixels_mean_per_class=None):
+def augment_folder(path=augment_path, generated_count=50, pixels_mean=None):
     # temporary margin to make sure the object won't oversize during deformation
     temp_margin = 2.0
     # margin after operations = final_margin * size
@@ -161,7 +172,7 @@ def augment_folder(path=augment_path, generated_count=50, pixels_mean_per_class=
     erosion_scaling = 4
 
     # detect images
-    p = Augmentor.Pipeline(path)
+    p = Augmentor.Pipeline(path, output_directory="augment")
     # get dimension of first image
     im_width = 100
     im_height = 100
@@ -180,6 +191,11 @@ def augment_folder(path=augment_path, generated_count=50, pixels_mean_per_class=
     p.add_operation(AutoCropImage(probability=1, margin=final_margin))
     p.resize(1, int(erosion_scaling * im_width), int(erosion_scaling * im_height))
     p.add_operation(SmoothImage(probability=1, blur=2, threshold=128))
-    p.add_operation(ErosImage(probability=1, max_erosion=4, max_dilation=4))
+    pixels_mean_scaled = None
+
+    if pixels_mean is not None:
+        pixels_mean_scaled = pixels_mean * erosion_scaling * erosion_scaling * 255  # max of pickle data pixel = 1
+
+    p.add_operation(ErosImage(probability=1, max_erosion=3, max_dilation=4, pixels_mean=pixels_mean_scaled))
     p.resize(1, int(im_width), int(im_height))
     p.sample(generated_count)

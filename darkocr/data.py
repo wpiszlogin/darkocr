@@ -26,8 +26,8 @@ class ImageData:
         self.data_y = np.array([])
 
     @staticmethod
-    def encode(char):
-        return decoding_list.index(char.upper())
+    def encode(char_s):
+        return decoding_list.index(char_s.upper())
 
     @staticmethod
     def decode(char_i, do_decode=True):
@@ -52,15 +52,15 @@ class ImageData:
 
     def save_data_set_to_png(self, path='train_data/png/'):
         for i in range(len(self.data_x)):
-            final_path = path + self.data_y[i] + '/'
+            final_path = path + '/' + str(self.data_y[i]) + '/'
             if not os.path.exists(final_path):
                 os.makedirs(final_path)
 
-            self.save_array_to_png(self.data_x[i], final_path+str(i)+'#'+str(self.data_y[i])+'.png')
+            self.save_array_to_png(self.data_x[i], final_path + str(i) + '#' + str(self.data_y[i]) + '.png')
 
-    def find_random_indexes(self, char, count):
+    def find_random_indexes(self, char_i, count):
         # find indexes where label == char
-        char_args = np.argwhere(self.data_y == char)
+        char_args = np.argwhere(self.data_y == char_i)
         char_args = char_args.reshape(char_args.shape[0])
         # select random elements
         if char_args.size > 0:
@@ -116,8 +116,8 @@ class ImageData:
         col = 0
         plt.figure(figsize=(20, 9))
         plt.subplots_adjust(left=0.01, right=0.99, top=0.99, bottom=0.01)
-        for char in range(classes_count):
-            char_indexes = self.find_random_indexes(char, examples_count)
+        for char_i in range(classes_count):
+            char_indexes = self.find_random_indexes(char_i, examples_count)
             # show them
             row = 0
             for label_index in char_indexes:

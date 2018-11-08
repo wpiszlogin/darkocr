@@ -4,6 +4,8 @@ from PIL import Image, ImageFilter
 import Augmentor
 from Augmentor.Operations import Operation
 
+augment_path = 'train_data/aug/'
+
 
 # erosion makes thinner line, dilation makes it thicker
 class ErosImage(Operation):
@@ -150,7 +152,7 @@ class AutoCropImage(Operation):
 
 
 # process folder containing png images
-def process_folder(path='train_data/aug/', generated_count=50, pixels_mean_per_class=None):
+def augment_folder(path=augment_path, generated_count=50, pixels_mean_per_class=None):
     # temporary margin to make sure the object won't oversize during deformation
     temp_margin = 2.0
     # margin after operations = final_margin * size

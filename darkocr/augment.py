@@ -20,7 +20,10 @@ class ErosImage(Operation):
     def perform_operation(self, image):
         image_mod = []
         for im in image:
+            # r choose way and scale of change
             r = random.randint(-self.max_erosion, self.max_dilation)
+
+            # use pixels mean of character
             if self.pixels_mean is not None:
                 # calc mean of this image
                 im_array = np.array(im)
@@ -28,6 +31,7 @@ class ErosImage(Operation):
                 thin_factor = (self.pixels_mean - im_pixels) / self.pixels_mean
                 r = r + int(3 * thin_factor)
 
+            # change to odd number
             r_odd = abs(2 * r - 1)
             im_mod = im
             if r > 0:

@@ -26,3 +26,8 @@ d.save_data_set_to_png('train_data/png/')
 from darkocr.darkocr import DarkOCR
 ocr = DarkOCR()
 ocr.augment_folder(50, 'D:/dev/projects/darkocr/train_data/png/0', 0)
+
+# read augmented data
+from darkocr.data import ImageData
+d = ImageData()
+d.read_augmented_data_set()

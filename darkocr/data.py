@@ -5,7 +5,7 @@ import pickle
 import numpy as np
 import matplotlib.pyplot as plt
 from PIL import Image
-
+import glob
 
 # data settings
 pickle_path = 'train_data/train.pkl'
@@ -57,6 +57,16 @@ class ImageData:
                 os.makedirs(final_path)
 
             self.save_array_to_png(self.data_x[i], final_path + str(i) + '#' + str(self.data_y[i]) + '.png')
+
+    def read_augmented_data_set(self, path='train_data/png/', classes=[0, 1, 2]):
+        path = 'train_data/read_test/0/'
+        path += '*.png'
+
+        image_list = []
+        for filename in glob.glob(path):
+            print(filename)
+            im = Image.open(filename)
+            image_list.append(np.array(im, dtype='d')/255)
 
     def find_random_indexes(self, char_i, count):
         # find indexes where label == char

@@ -26,8 +26,8 @@ decoding_list = [
 class ImageData:
     def __init__(self):
         # origin data set
-        self.data_x = np.array([])
-        self.data_y = np.array([])
+        self.origin_x = np.array([])
+        self.origin_y = np.array([])
 
         # augmented data set
         self.train_y = np.array([])
@@ -46,14 +46,15 @@ class ImageData:
         else:
             return char_i
 
-    def read_data(self, path):
+    @staticmethod
+    def read_pickle(path):
         with open(path, "rb") as pickle_data:
-            self.data_x, self.data_y = pickle.load(pickle_data)
+            return pickle.load(pickle_data)
 
-    def read_reshaped_data(self, path):
-        self.read_data(path)
-        self.data_x = self.data_x.reshape(self.data_x.shape[0], image_dim, image_dim)
-        self.data_y = self.data_y.reshape(self.data_y.shape[0])
+    def read_origin_data(self, path):
+        x, y = self.read_pickle(path)
+        self.origin_x = x.reshape(-1, image_dim, image_dim)
+        self.origin_y = y.reshape(-1)
 
     @staticmethod
     def save_array_to_png(a, path):
@@ -61,12 +62,12 @@ class ImageData:
         im.save(path)
 
     def save_data_set_to_png(self, path=png_path):
-        for i in range(len(self.data_x)):
-            final_path = path + '/' + str(self.data_y[i]) + '/'
+        for i in range(len(self.origin_x)):
+            final_path = path + '/' + str(self.origin_y[i]) + '/'
             if not os.path.exists(final_path):
                 os.makedirs(final_path)
 
-            self.save_array_to_png(self.data_x[i], final_path + str(i) + '#' + str(self.data_y[i]) + '.png')
+            self.save_array_to_png(self.origin_x[i], final_path + str(i) + '#' + str(self.origin_y[i]) + '.png')
 
     @staticmethod
     def path_to_file_name(path):
@@ -75,7 +76,7 @@ class ImageData:
         return path[max(sl, bsl) + 1:]
 
     # read augmented png folders and build data set which is easy to manipulate
-    def read_augmented_data_set(self, in_path=png_path, out_path=None, classes_count_int=classes_count):
+    def read_augmented_data_and_process(self, in_path=png_path, out_path=None, classes_count_int=classes_count):
         print('\nRead augmented images started...\n')
 
         data_set_list = []
@@ -123,14 +124,10 @@ class ImageData:
         return a[p], b[p]
 
     # transform data to k-fold validation set, it prevents mix augmented images between training and testing set
-    def from_aug_pickle_to_training_set(self, data_set=None, aug_pickle_path=None, test_fold=4):
-        # read augmented data from pickle file
-        if data_set is None and aug_pickle_path is None:
+    def from_processed_data_to_training_set(self, data_set=None, test_fold=4):
+        if data_set is None:
             print("\nCan't build training set. No data set!\n")
             return
-        elif aug_pickle_path is not None:
-            with open(aug_pickle_path, "rb") as pickle_data:
-                data_set = pickle.load(pickle_data)
 
         classes_count_int = len(data_set)
         print('\nBuilding training set of {} classes, fold = {} ...\n'.format(classes_count_int, test_fold))
@@ -195,7 +192,7 @@ class ImageData:
 
     def find_random_indexes(self, char_i, count):
         # find indexes where label == char
-        char_args = np.argwhere(self.data_y == char_i)
+        char_args = np.argwhere(self.origin_y == char_i)
         char_args = char_args.reshape(char_args.shape[0])
         # select random elements
         if char_args.size > 0:
@@ -205,10 +202,10 @@ class ImageData:
 
     def calc_pixels_mean(self):
         labels_mean = np.zeros(classes_count)
-        for i in range(len(self.data_x)):
-            labels_mean[self.data_y[i]] += np.sum(self.data_x[i])
+        for i in range(len(self.origin_x)):
+            labels_mean[self.origin_y[i]] += np.sum(self.origin_x[i])
 
-        unique, counts = np.unique(self.data_y, return_counts=True)
+        unique, counts = np.unique(self.origin_y, return_counts=True)
         counts_dict = dict(zip(unique, counts))
         for k, v in counts_dict.items():
             labels_mean[k] /= v
@@ -216,7 +213,7 @@ class ImageData:
         return labels_mean
 
     # visual functions
-    def show_all_chars(self, do_decode=True, examples_count=10):
+    def show_origin_all_chars(self, do_decode=True, examples_count=10):
         col = 0
         plt.figure(figsize=(20, 9))
         plt.subplots_adjust(left=0.01, right=0.99, top=0.99, bottom=0.01)
@@ -228,8 +225,8 @@ class ImageData:
                 # goes through columns
                 plt.subplot(examples_count, classes_count, row * classes_count + col + 1)
                 # we need to reshape to image_dim x image_dim
-                plt.imshow(self.data_x[label_index], cmap=plt.cm.binary)
-                plt.xlabel(self.decode(self.data_y[label_index], do_decode))
+                plt.imshow(self.origin_x[label_index], cmap=plt.cm.binary)
+                plt.xlabel(self.decode(self.origin_y[label_index], do_decode))
                 plt.xticks([])
                 plt.yticks([])
                 row += 1
@@ -238,7 +235,7 @@ class ImageData:
         fig.canvas.set_window_title('All characters')
         plt.show()
 
-    def show_chars_data(self, char_s=None, do_decode=True, cols_count=27, rows_count=10):
+    def show_origin_chars_data(self, char_s=None, do_decode=True, cols_count=27, rows_count=10):
         char = None
         if char_s is not None:
             char = self.encode(char_s)
@@ -250,14 +247,14 @@ class ImageData:
         plt.figure(figsize=(20, 11))
         plt.subplots_adjust(left=0.01, right=0.99, top=0.99, bottom=0.01)
         for i in range(cols_count * rows_count):
-            if i < len(self.data_x) and i < len(self.data_y):
+            if i < len(self.origin_x) and i < len(self.origin_y):
                 index = i
                 if i < len(char_indexes):
                     index = char_indexes[i]
 
                 plt.subplot(rows_count, cols_count, i + 1)
-                plt.imshow(self.data_x[index], cmap=plt.cm.binary)
-                plt.xlabel(self.decode(self.data_y[index], do_decode))
+                plt.imshow(self.origin_x[index], cmap=plt.cm.binary)
+                plt.xlabel(self.decode(self.origin_y[index], do_decode))
                 plt.xticks([])
                 plt.yticks([])
         fig = plt.gcf()
@@ -267,9 +264,9 @@ class ImageData:
             fig.canvas.set_window_title('Continuous data set from beginning')
         plt.show()
 
-    def show_data_histogram(self):
+    def show_origin_data_histogram(self):
         plt.figure(figsize=(12, 4))
-        plt.hist(self.data_y, bins=range(classes_count + 1), edgecolor='black', facecolor='blue', align='left')
+        plt.hist(self.origin_y, bins=range(classes_count + 1), edgecolor='black', facecolor='blue', align='left')
         plt.xticks(range(classes_count))
         plt.xlabel('Labels')
         plt.ylabel('Count')
@@ -278,8 +275,8 @@ class ImageData:
         fig.canvas.set_window_title('Histogram of data set')
         plt.show()
 
-    def print_labels_count(self, sort=False):
-        unique, counts = np.unique(self.data_y, return_counts=True)
+    def print_origin_labels_count(self, sort=False):
+        unique, counts = np.unique(self.origin_y, return_counts=True)
         counts_dict = dict(zip(unique, counts))
         if sort:
             sorted_counts = sorted(counts_dict.items(), key=operator.itemgetter(1))

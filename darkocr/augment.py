@@ -5,8 +5,6 @@ import Augmentor
 from Augmentor.Operations import Operation
 import numpy as np
 
-augment_path = 'train_data/aug/'
-
 
 # below classes extends Augmentor
 # erosion makes thinner line, dilation makes it thicker
@@ -166,7 +164,7 @@ class AutoCropImage(Operation):
 
 
 # process folder containing png images
-def augment_folder(path=augment_path, generated_count=50, pixels_mean=None):
+def augment_folder(path, generated_count=50, pixels_mean=None):
     # temporary margin to make sure the object won't oversize during deformation
     temp_margin = 2.0
     # margin after operations = final_margin * size

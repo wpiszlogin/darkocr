@@ -8,20 +8,24 @@ class DarkOCR:
         print('DarkOCR initialization...')
         self.data = ImageData()
         # reading data
-        self.data.read_reshaped_data(pickle_path)
+        self.data.read_origin_data(pickle_path)
         self.model = CNNModel(image_dim, image_dim, classes_count)
+        print('Complete')
 
-    def show_data(self, path=pickle_path, char='p'):
+    def show_origin_data(self, char='p'):
         # visualization
-        self.data.show_all_chars()
-        self.data.show_chars_data()
-        self.data.show_chars_data(char)
+        self.data.show_origin_all_chars()
+        self.data.show_origin_chars_data()
+        self.data.show_origin_chars_data(char)
 
-    def show_data_statistics(self, path=pickle_path):
-        self.data.show_data_histogram()
-        self.data.print_labels_count()
+    def show_origin_data_statistics(self):
+        self.data.show_origin_data_histogram()
+        self.data.print_origin_labels_count()
 
-    def augment_folder(self, generated_count=50, path=augment_path, char_i=None):
+    def save_data_set_to_png(self, path):
+        self.data.save_data_set_to_png(path)
+
+    def augment_folder(self, path, char_i=None, generated_count=50):
         pixels_mean = None
         if char_i is not None:
             pixels_mean_per_class = self.data.calc_pixels_mean()
@@ -30,11 +34,15 @@ class DarkOCR:
         augment_folder(path, generated_count=generated_count, pixels_mean=pixels_mean)
 
     def fit_from_aug_pickle(self, aug_pickle_path=augmented_pickle_path):
+        data_set = self.data.read_pickle(aug_pickle_path)
+        self.fit(data_set)
+
+    def fit(self, data_set):
         # single fold means standard cross-validation
         test_fold = 4
 
-        (train_x, train_y), (test_x, test_y) = self.data.from_aug_pickle_to_training_set(
-            aug_pickle_path=aug_pickle_path,
+        (train_x, train_y), (test_x, test_y) = self.data.from_processed_data_to_training_set(
+            data_set=data_set,
             test_fold=test_fold)
 
         self.model.fit(train_x, train_y, test_x, test_y)

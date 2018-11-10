@@ -9,9 +9,11 @@ import glob
 
 # data settings
 pickle_path = 'train_data/train.pkl'
+png_path = 'train_data/png/'
 classes_count = 36
 image_dim = 56
 test_data_ratio = 0.2
+fold_count = 5
 # note: N* is a one-piece collection, it's probably data set error
 decoding_list = [
     '6', 'P', '0', 'V', 'W', '3', 'A', '8', 'T', '1',
@@ -50,7 +52,7 @@ class ImageData:
         im = Image.fromarray(a*255)
         im.save(path)
 
-    def save_data_set_to_png(self, path='train_data/png/'):
+    def save_data_set_to_png(self, path=png_path):
         for i in range(len(self.data_x)):
             final_path = path + '/' + str(self.data_y[i]) + '/'
             if not os.path.exists(final_path):
@@ -58,37 +60,112 @@ class ImageData:
 
             self.save_array_to_png(self.data_x[i], final_path + str(i) + '#' + str(self.data_y[i]) + '.png')
 
-    def read_augmented_data_set(self, path='train_data/png/', classes=[0, 1, 2]):
-        path = 'train_data/read_test/0/'
-        path += '*.png'
+    @staticmethod
+    def path_to_file_name(path):
+        sl = path.rfind("/")
+        bsl = path.rfind("\\")
+        return path[max(sl, bsl) + 1:]
 
-        image_list = []
-        for filename in glob.glob(path):
-            print(filename)
-            im = Image.open(filename)
-            image_list.append(np.array(im, dtype='d')/255)
+    def read_augmented_data_set(self, path=png_path, classes=list(range(classes_count))):
+        print('Read augmented images started...')
+        classes_count_int = len(classes)
 
-    def find_random_indexes(self, char_i, count):
-        # find indexes where label == char
-        char_args = np.argwhere(self.data_y == char_i)
-        char_args = char_args.reshape(char_args.shape[0])
-        # select random elements
-        if char_args.size > 0:
-            return np.random.choice(char_args, count)
-        else:
-            return np.empty(0)
+        data_set_list = []
+        extension = '*.png'
+        aug_fold = '/augmentation/'
 
-    def calc_pixels_mean(self):
-        labels_mean = np.zeros(classes_count)
-        for i in range(len(self.data_x)):
-            labels_mean[self.data_y[i]] += np.sum(self.data_x[i])
+        for char_i in range(classes_count_int):
+            print('\nCLASS = {} \n'.format(char_i))
+            augm_temp_list = []
+            origin_list = []
+            # get list of augmented images
+            print('processing AUG: ' + path + str(char_i) + '/' + aug_fold + extension)
+            for im_path in glob.glob(path + str(char_i) + aug_fold + extension):
+                print(im_path)
+                im = Image.open(im_path)
+                file_name = self.path_to_file_name(im_path)
+                augm_temp_list.append((file_name, np.array(im, dtype='d')/255))
 
-        unique, counts = np.unique(self.data_y, return_counts=True)
-        counts_dict = dict(zip(unique, counts))
-        for k, v in counts_dict.items():
-            labels_mean[k] /= v
+            # match augmented to original images
+            print('\nprocessing ORYG: ' + path + str(char_i) + extension)
+            for im_path in glob.glob(path + str(char_i) + '/' + extension):
+                augm_list = []
+                im = Image.open(im_path)
+                # find augmented images from original
+                file_name = self.path_to_file_name(im_path)
+                print(str(char_i) + '_original_' + file_name)
+                matching = [a for n, a in augm_temp_list if n.startswith(str(char_i) + '_original_' + file_name)]
+                print(len(matching))
+                # zero element is alleyways original image
+                augm_list.append(np.array(im, dtype='d')/255)
+                # extend the list by all augmented images
+                augm_list.extend(matching)
+                # this list contains all sublist of one augmentation
+                origin_list.append(augm_list)
 
-        return labels_mean
+            # add sublist of one class for whole data set
+            data_set_list.append(origin_list)
+
+        with open("aug_data", 'wb') as file:
+            pickle.dump(data_set_list, file, protocol=pickle.HIGHEST_PROTOCOL)
+
+        return data_set_list
+
+    def from_aug_pickle_to_training_set(self, test_fold=4, classes_count_int=classes_count):
+        # read augmented data from pickle file
+        data_set = None
+        with open('aug_data', "rb") as pickle_data:
+            data_set = pickle.load(pickle_data)
+
+        train_list_y = []
+        train_list_x = []
+        test_list_y = []
+        test_list_x = []
+
+        fold = 0
+        for label in range(classes_count_int):
+            for examp in data_set[label]:
+                for aug in examp:
+                    if fold == test_fold:
+                        test_list_x.append(aug)
+                        test_list_y.append(label)
+                    else:
+                        train_list_x.append(aug)
+                        train_list_y.append(label)
+
+                if fold >= fold_count - 1:
+                    fold = 0
+                else:
+                    fold += 1
+
+        train_y = np.array(train_list_y)
+        train_x = np.array(train_list_x)
+        test_y = np.array(test_list_y)
+        test_x = np.array(test_list_x)
+
+        # x = final_train_x.reshape(final_train_x.shape[0], final_train_x.shape[1], final_train_x.shape[2], 1)
+        # xt = final_test_x.reshape(final_test_x.shape[0], final_test_x.shape[1], final_test_x.shape[2], 1)
+        self.show_training_set(train_x, train_y, test_x, test_y)
+
+        return (train_x, train_y), (test_x, test_y)
+
+    # it can be use to validate small data set
+    def show_training_set(self, train_x, train_y, test_x, test_y, cols_count=27, rows_count=10):
+        # multiply by 10 to mark test labels
+        test_y = test_y + 100
+        # merge sets
+        merge_x = np.concatenate((train_x, test_x), axis=0)
+        merge_y = np.concatenate((train_y, test_y), axis=0)
+
+        plt.figure(figsize=(20, 11))
+        plt.subplots_adjust(left=0.01, right=0.99, top=0.99, bottom=0.01)
+        for i in range(cols_count * rows_count):
+            if i < len(merge_x) and i < len(merge_y):
+                plt.subplot(rows_count, cols_count, i + 1)
+                plt.imshow(merge_x[i], cmap=plt.cm.binary)
+                plt.xlabel(merge_y[i])
+                plt.xticks([])
+                plt.yticks([])
 
     def perpare_data_set_for_training(self):
         print('this is in progress')
@@ -120,6 +197,28 @@ class ImageData:
         # # adding dimension - color depth
         # x = final_train_x.reshape(final_train_x.shape[0], final_train_x.shape[1], final_train_x.shape[2], 1)
         # xt = final_test_x.reshape(final_test_x.shape[0], final_test_x.shape[1], final_test_x.shape[2], 1)
+
+    def find_random_indexes(self, char_i, count):
+        # find indexes where label == char
+        char_args = np.argwhere(self.data_y == char_i)
+        char_args = char_args.reshape(char_args.shape[0])
+        # select random elements
+        if char_args.size > 0:
+            return np.random.choice(char_args, count)
+        else:
+            return np.empty(0)
+
+    def calc_pixels_mean(self):
+        labels_mean = np.zeros(classes_count)
+        for i in range(len(self.data_x)):
+            labels_mean[self.data_y[i]] += np.sum(self.data_x[i])
+
+        unique, counts = np.unique(self.data_y, return_counts=True)
+        counts_dict = dict(zip(unique, counts))
+        for k, v in counts_dict.items():
+            labels_mean[k] /= v
+
+        return labels_mean
 
     # visual functions
     def show_all_chars(self, do_decode=True, examples_count=10):

@@ -27,7 +27,6 @@ class DarkOCR:
             pixels_mean_per_class = self.data.calc_pixels_mean()
             pixels_mean = pixels_mean_per_class[char_i]
 
-        print('before {}'.format(pixels_mean))
         augment_folder(path, generated_count=generated_count, pixels_mean=pixels_mean)
 
     def predict(self, input_data):

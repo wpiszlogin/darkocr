@@ -30,4 +30,19 @@ ocr.augment_folder(50, 'D:/dev/projects/darkocr/train_data/png/0', 0)
 # read augmented data
 from darkocr.data import ImageData
 d = ImageData()
-d.read_augmented_data_set()
+dataset = d.read_augmented_data_set()
+
+from PIL import Image, ImageFilter
+Image.fromarray(dataset[0][0][0] * 255).show()
+
+import pickle
+from PIL import Image, ImageFilter
+datas = None
+with open('aug_data', "rb") as pickle_data:
+    datas = pickle.load(pickle_data)
+Image.fromarray(datas[1][0][3] * 255).show()
+
+# generate training data
+from darkocr.data import ImageData
+d = ImageData()
+dataset = d.from_aug_pickle_to_training_set()

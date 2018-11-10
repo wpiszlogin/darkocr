@@ -127,7 +127,7 @@ class ImageData:
                 data_set = pickle.load(pickle_data)
 
         classes_count_int = len(data_set)
-        print('\nBuilding training set of {} classes...\n'.format(classes_count_int))
+        print('\nBuilding training set of {} classes, fold = {} ...\n'.format(classes_count_int, test_fold))
         train_list_y = []
         train_list_x = []
         test_list_y = []
@@ -154,13 +154,11 @@ class ImageData:
 
             print('Class {} has {} examples ({} was original)'.format(label, e_per_label_count, len(data_set[label])))
 
+        # transform to np array and add dimension - color depth
+        self.train_x = np.expand_dims(np.array(train_list_x), axis=3)
         self.train_y = np.array(train_list_y)
-        self.train_x = np.array(train_list_x)
+        self.test_x = np.expand_dims(np.array(test_list_x), axis=3)
         self.test_y = np.array(test_list_y)
-        self.test_x = np.array(test_list_x)
-
-        # x = final_train_x.reshape(final_train_x.shape[0], final_train_x.shape[1], final_train_x.shape[2], 1)
-        # xt = final_test_x.reshape(final_test_x.shape[0], final_test_x.shape[1], final_test_x.shape[2], 1)
 
         print('\nTraining set is complete\n')
         return (self.train_x, self.train_y), (self.test_x, self.test_y)
@@ -172,6 +170,8 @@ class ImageData:
         # merge sets
         merge_x = np.concatenate((self.train_x, self.test_x), axis=0)
         merge_y = np.concatenate((self.train_y, test_y_int), axis=0)
+        # decrease dimension - delete color depth
+        merge_x = np.squeeze(merge_x, axis=3)
 
         plt.figure(figsize=(20, 11))
         plt.subplots_adjust(left=0.01, right=0.99, top=0.99, bottom=0.01)
@@ -186,37 +186,6 @@ class ImageData:
         fig = plt.gcf()
         fig.canvas.set_window_title('Training set validation')
         plt.show()
-
-    def perpare_data_set_for_training(self):
-        print('this is in progress')
-        # # building final training data
-        # pi = find_random_indexes(train_y, encode('a'), 1000)
-        # zi = find_random_indexes(train_y, encode('e'), 1000)
-        # pzi = np.concatenate((pi, zi))
-        # np.random.shuffle(pzi)
-        # # copying data
-        # train_count = int((1.0-test_data_ratio)*len(pzi))
-        # test_count = len(pzi) - train_count
-        # final_train_y = np.zeros(train_count, dtype='int64')
-        # final_train_x = np.zeros((train_count, image_dim, image_dim), dtype='uint8')
-        # final_test_y = np.zeros(test_count, dtype='int64')
-        # final_test_x = np.zeros((test_count, image_dim, image_dim), dtype='uint8')
-        #
-        # i = 0
-        # for pz in pzi:
-        #     if i < len(final_train_y):
-        #         final_train_x[i] = train_x[pz]
-        #         final_train_y[i] = train_y[pz]
-        #     else:
-        #         final_test_x[train_count-i] = train_x[pz]
-        #         final_test_y[train_count-i] = train_y[pz]
-        #     i += 1
-        #
-        # # show_chars_data(final_train_x, final_train_y)
-        # # show_chars_data(final_test_x, final_test_y)
-        # # adding dimension - color depth
-        # x = final_train_x.reshape(final_train_x.shape[0], final_train_x.shape[1], final_train_x.shape[2], 1)
-        # xt = final_test_x.reshape(final_test_x.shape[0], final_test_x.shape[1], final_test_x.shape[2], 1)
 
     def find_random_indexes(self, char_i, count):
         # find indexes where label == char

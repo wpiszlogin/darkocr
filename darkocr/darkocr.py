@@ -29,5 +29,15 @@ class DarkOCR:
 
         augment_folder(path, generated_count=generated_count, pixels_mean=pixels_mean)
 
+    def fit_from_aug_pickle(self, aug_pickle_path=augmented_pickle_path):
+        # single fold means standard cross-validation
+        test_fold = 4
+
+        (train_x, train_y), (test_x, test_y) = self.data.from_aug_pickle_to_training_set(
+            aug_pickle_path=aug_pickle_path,
+            test_fold=test_fold)
+
+        self.model.fit(train_x, train_y, test_x, test_y)
+
     def predict(self, input_data):
         return self.model.predict(input_data)

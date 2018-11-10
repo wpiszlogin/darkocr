@@ -43,3 +43,8 @@ from darkocr.data import ImageData
 d = ImageData()
 trainset = d.from_aug_pickle_to_training_set(aug_pickle_path='train_data/aug_data.pkl', test_fold=4)
 d.show_training_set()
+
+# fit model
+from darkocr.darkocr import DarkOCR
+ocr = DarkOCR()
+ocr.fit_from_aug_pickle()

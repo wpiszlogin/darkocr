@@ -33,7 +33,7 @@ augmented_pickle_path = 'train_data/aug_data.pkl'
 # read augmented data
 from darkocr.data import ImageData
 d = ImageData()
-dataset = d.read_augmented_data_set(in_path='train_data/read_test/', out_path='train_data/aug_data.pkl', classes_count_int=4)
+dataset = d.read_augmented_data_set(in_path='train_data/png/', out_path='train_data/aug_data.pkl', classes_count_int=4)
 
 from PIL import Image, ImageFilter
 Image.fromarray(dataset[0][0][0] * 255).show()

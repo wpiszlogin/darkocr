@@ -25,7 +25,7 @@ class CNNModel:
         self.model.compile(optimizer='rmsprop', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
 
     def fit(self, train_x, train_y, test_x, test_y):
-        self.model.fit(train_x, train_y, batch_size=512, validation_data=(test_x, test_y), epochs=5, verbose=1)
+        self.model.fit(train_x, train_y, batch_size=512, validation_data=(test_x, test_y), epochs=10, verbose=1)
 
     def predict(self, data_x):
         return self.model.predict(data_x)

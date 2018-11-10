@@ -116,6 +116,12 @@ class ImageData:
         print('\nRead finished\n')
         return data_set_list
 
+    @staticmethod
+    def unison_shuffled_copies(a, b):
+        assert len(a) == len(b)
+        p = np.random.permutation(len(a))
+        return a[p], b[p]
+
     # transform data to k-fold validation set, it prevents mix augmented images between training and testing set
     def from_aug_pickle_to_training_set(self, data_set=None, aug_pickle_path=None, test_fold=4):
         # read augmented data from pickle file

@@ -10,6 +10,7 @@ import glob
 # data settings
 pickle_path = 'train_data/train.pkl'
 png_path = 'train_data/png/'
+augmented_pickle_path = 'train_data/aug_data.pkl'
 classes_count = 36
 image_dim = 56
 test_data_ratio = 0.2
@@ -24,8 +25,15 @@ decoding_list = [
 
 class ImageData:
     def __init__(self):
+        # origin data set
         self.data_x = np.array([])
         self.data_y = np.array([])
+
+        # augmented data set
+        self.train_y = np.array([])
+        self.train_x = np.array([])
+        self.test_y = np.array([])
+        self.test_x = np.array([])
 
     @staticmethod
     def encode(char_s):
@@ -66,36 +74,31 @@ class ImageData:
         bsl = path.rfind("\\")
         return path[max(sl, bsl) + 1:]
 
-    def read_augmented_data_set(self, path=png_path, classes=list(range(classes_count))):
-        print('Read augmented images started...')
-        classes_count_int = len(classes)
+    # read augmented png folders and build data set which is easy to manipulate
+    def read_augmented_data_set(self, in_path=png_path, out_path=None, classes_count_int=classes_count):
+        print('\nRead augmented images started...\n')
 
         data_set_list = []
         extension = '*.png'
         aug_fold = '/augmentation/'
 
         for char_i in range(classes_count_int):
-            print('\nCLASS = {} \n'.format(char_i))
+            print('Processing class {}'.format(char_i))
             augm_temp_list = []
             origin_list = []
             # get list of augmented images
-            print('processing AUG: ' + path + str(char_i) + '/' + aug_fold + extension)
-            for im_path in glob.glob(path + str(char_i) + aug_fold + extension):
-                print(im_path)
+            for im_path in glob.glob(in_path + str(char_i) + aug_fold + extension):
                 im = Image.open(im_path)
                 file_name = self.path_to_file_name(im_path)
                 augm_temp_list.append((file_name, np.array(im, dtype='d')/255))
 
             # match augmented to original images
-            print('\nprocessing ORYG: ' + path + str(char_i) + extension)
-            for im_path in glob.glob(path + str(char_i) + '/' + extension):
+            for im_path in glob.glob(in_path + str(char_i) + '/' + extension):
                 augm_list = []
                 im = Image.open(im_path)
                 # find augmented images from original
                 file_name = self.path_to_file_name(im_path)
-                print(str(char_i) + '_original_' + file_name)
                 matching = [a for n, a in augm_temp_list if n.startswith(str(char_i) + '_original_' + file_name)]
-                print(len(matching))
                 # zero element is alleyways original image
                 augm_list.append(np.array(im, dtype='d')/255)
                 # extend the list by all augmented images
@@ -106,17 +109,25 @@ class ImageData:
             # add sublist of one class for whole data set
             data_set_list.append(origin_list)
 
-        with open("aug_data", 'wb') as file:
-            pickle.dump(data_set_list, file, protocol=pickle.HIGHEST_PROTOCOL)
+        if out_path is not None:
+            with open(out_path, 'wb') as file:
+                pickle.dump(data_set_list, file, protocol=pickle.HIGHEST_PROTOCOL)
 
+        print('\nRead finished\n')
         return data_set_list
 
-    def from_aug_pickle_to_training_set(self, test_fold=4, classes_count_int=classes_count):
+    # transform data to k-fold validation set, it prevents mix augmented images between training and testing set
+    def from_aug_pickle_to_training_set(self, data_set=None, aug_pickle_path=None, test_fold=4):
         # read augmented data from pickle file
-        data_set = None
-        with open('aug_data', "rb") as pickle_data:
-            data_set = pickle.load(pickle_data)
+        if data_set is None and aug_pickle_path is None:
+            print("\nCan't build training set. No data set!\n")
+            return
+        elif aug_pickle_path is not None:
+            with open(aug_pickle_path, "rb") as pickle_data:
+                data_set = pickle.load(pickle_data)
 
+        classes_count_int = len(data_set)
+        print('\nBuilding training set of {} classes...\n'.format(classes_count_int))
         train_list_y = []
         train_list_x = []
         test_list_y = []
@@ -124,6 +135,7 @@ class ImageData:
 
         fold = 0
         for label in range(classes_count_int):
+            e_per_label_count = 0
             for examp in data_set[label]:
                 for aug in examp:
                     if fold == test_fold:
@@ -133,29 +145,33 @@ class ImageData:
                         train_list_x.append(aug)
                         train_list_y.append(label)
 
+                    e_per_label_count += 1
+
                 if fold >= fold_count - 1:
                     fold = 0
                 else:
                     fold += 1
 
-        train_y = np.array(train_list_y)
-        train_x = np.array(train_list_x)
-        test_y = np.array(test_list_y)
-        test_x = np.array(test_list_x)
+            print('Class {} has {} examples ({} was original)'.format(label, e_per_label_count, len(data_set[label])))
+
+        self.train_y = np.array(train_list_y)
+        self.train_x = np.array(train_list_x)
+        self.test_y = np.array(test_list_y)
+        self.test_x = np.array(test_list_x)
 
         # x = final_train_x.reshape(final_train_x.shape[0], final_train_x.shape[1], final_train_x.shape[2], 1)
         # xt = final_test_x.reshape(final_test_x.shape[0], final_test_x.shape[1], final_test_x.shape[2], 1)
-        self.show_training_set(train_x, train_y, test_x, test_y)
 
-        return (train_x, train_y), (test_x, test_y)
+        print('\nTraining set is complete\n')
+        return (self.train_x, self.train_y), (self.test_x, self.test_y)
 
     # it can be use to validate small data set
-    def show_training_set(self, train_x, train_y, test_x, test_y, cols_count=27, rows_count=10):
-        # multiply by 10 to mark test labels
-        test_y = test_y + 100
+    def show_training_set(self, cols_count=27, rows_count=10):
+        # multiply by 100 to easy mark test labels
+        test_y_int = self.test_y + 100
         # merge sets
-        merge_x = np.concatenate((train_x, test_x), axis=0)
-        merge_y = np.concatenate((train_y, test_y), axis=0)
+        merge_x = np.concatenate((self.train_x, self.test_x), axis=0)
+        merge_y = np.concatenate((self.train_y, test_y_int), axis=0)
 
         plt.figure(figsize=(20, 11))
         plt.subplots_adjust(left=0.01, right=0.99, top=0.99, bottom=0.01)
@@ -166,6 +182,10 @@ class ImageData:
                 plt.xlabel(merge_y[i])
                 plt.xticks([])
                 plt.yticks([])
+
+        fig = plt.gcf()
+        fig.canvas.set_window_title('Training set validation')
+        plt.show()
 
     def perpare_data_set_for_training(self):
         print('this is in progress')

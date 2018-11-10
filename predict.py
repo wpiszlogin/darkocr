@@ -27,22 +27,19 @@ from darkocr.darkocr import DarkOCR
 ocr = DarkOCR()
 ocr.augment_folder(50, 'D:/dev/projects/darkocr/train_data/png/0', 0)
 
+png_path = 'train_data/png/'
+augmented_pickle_path = 'train_data/aug_data.pkl'
+
 # read augmented data
 from darkocr.data import ImageData
 d = ImageData()
-dataset = d.read_augmented_data_set()
+dataset = d.read_augmented_data_set(in_path='train_data/read_test/', out_path='train_data/aug_data.pkl', classes_count_int=4)
 
 from PIL import Image, ImageFilter
 Image.fromarray(dataset[0][0][0] * 255).show()
 
-import pickle
-from PIL import Image, ImageFilter
-datas = None
-with open('aug_data', "rb") as pickle_data:
-    datas = pickle.load(pickle_data)
-Image.fromarray(datas[1][0][3] * 255).show()
-
 # generate training data
 from darkocr.data import ImageData
 d = ImageData()
-dataset = d.from_aug_pickle_to_training_set()
+trainset = d.from_aug_pickle_to_training_set(aug_pickle_path='train_data/aug_data.pkl', test_fold=4)
+d.show_training_set()

@@ -15,6 +15,7 @@ class CNNModel:
 
         # hyper parameters
         dropout = 0.2
+        learning_rate = 0.002
 
         # build convolution network model
         self.model = keras.Sequential()
@@ -39,18 +40,19 @@ class CNNModel:
         self.model.add(Dropout(dropout))
 
         self.model.add(Flatten())
-        self.model.add(Dense(10, use_bias=False))
+        self.model.add(Dense(32, use_bias=False))
         self.model.add(BatchNormalization())
         self.model.add(Activation("relu"))
         self.model.add(Dropout(dropout))
         self.model.add(Dense(classes_count, activation='softmax'))
 
-        self.model.compile(optimizer='nadam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+        optimizer = keras.optimizers.Nadam(lr=learning_rate, beta_1=0.9, beta_2=0.999, epsilon=None, schedule_decay=0.004)
+        self.model.compile(optimizer=optimizer, loss='sparse_categorical_crossentropy', metrics=['accuracy'])
 
     def fit(self, train_x, train_y, test_x, test_y):
         start_time = time.time()
         self.history = self.model.fit(train_x, train_y, batch_size=512, validation_data=(test_x, test_y),
-                                      epochs=30, verbose=1)
+                                      epochs=20, verbose=1)
         end_time = time.time()
         print('Training time: {} s'.format(int(end_time - start_time)))
 

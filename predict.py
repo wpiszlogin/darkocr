@@ -16,7 +16,7 @@ ocr = DarkOCR()
 ocr.show_origin_data()
 ocr.show_origin_data_statistics()
 ocr.save_data_set_to_png('train_data/aug_test')
-# it is better to do augmentation individually, to control it
+# it is better to do augment individually, to control it
 ocr.augment_folder('train_data/aug_test/', 0, 50)
 ocr.fit_from_aug_folder('train_data/aug_test/')
 
@@ -32,6 +32,7 @@ data_set = data.read_augmented_data_and_process(in_path='train_data/png/', out_p
                                                 classes_count_int=4)
 # test it
 from PIL import Image
+# [class][example][augmentation, 0 - origin]
 Image.fromarray(data_set[0][0][0] * 255).show()
 
 # generate training data

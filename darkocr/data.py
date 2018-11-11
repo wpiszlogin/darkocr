@@ -124,7 +124,7 @@ class ImageData:
         return a[p], b[p]
 
     # transform data to k-fold validation set, it prevents mix augmented images between training and testing set
-    def from_processed_data_to_training_set(self, data_set=None, test_fold=4):
+    def from_processed_data_to_training_set(self, data_set=None, test_fold=4, permutation=True):
         if data_set is None:
             print("\nCan't build training set. No data set!\n")
             return
@@ -157,11 +157,21 @@ class ImageData:
 
             print('Class {} has {} examples ({} was original)'.format(label, e_per_label_count, len(data_set[label])))
 
-        # transform to np array and add dimension - color depth
-        self.train_x = np.expand_dims(np.array(train_list_x), axis=3)
-        self.train_y = np.array(train_list_y)
-        self.test_x = np.expand_dims(np.array(test_list_x), axis=3)
-        self.test_y = np.array(test_list_y)
+        # transform to np array
+        train_x = np.array(train_list_x)
+        train_y = np.array(train_list_y)
+        test_x = np.array(test_list_x)
+        test_y = np.array(test_list_y)
+
+        # examples permutation
+        if permutation:
+            train_x, train_y = self.unison_shuffled_copies(train_x, train_y)
+
+        # add dimension - color depth
+        self.train_x = np.expand_dims(train_x, axis=3)
+        self.train_y = train_y
+        self.test_x = np.expand_dims(test_x, axis=3)
+        self.test_y = test_y
 
         print('\nTraining set is complete\n')
         return (self.train_x, self.train_y), (self.test_x, self.test_y)

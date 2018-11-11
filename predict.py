@@ -25,11 +25,11 @@ from darkocr.darkocr import DarkOCR
 ocr = DarkOCR()
 ocr.augment_folder('D:/dev/projects/darkocr/train_data/png/', 19, 50)
 
-# read augmented data
+# read augmented data, save to processed pickle file
 from darkocr.data import ImageData
 data = ImageData()
-data_set = data.read_augmented_data_and_process(in_path='train_data/png/', out_path='train_data/aug_data.pkl',
-                                                classes_count_int=4)
+data_set = data.read_augmented_data_and_process(in_path='train_data/png/', out_path='train_data/aug_data26.pkl',
+                                                classes_count_int=26)
 # test it
 from PIL import Image
 # [class][example][augmentation, 0 - origin]
@@ -38,10 +38,12 @@ Image.fromarray(data_set[0][0][0] * 255).show()
 # generate training data
 from darkocr.data import ImageData
 data = ImageData()
-train_set = data.from_processed_data_to_training_set(data_set=data.read_pickle('train_data/aug_data.pkl'), test_fold=4)
+train_set = data.from_processed_data_to_training_set(data_set=data.read_pickle('train_data/aug_data26.pkl'), test_fold=4)
+# show it
 data.show_training_set()
 
 # fit model
 from darkocr.darkocr import DarkOCR
 ocr = DarkOCR()
-ocr.fit_from_aug_pickle()
+ocr.fit_from_aug_pickle(aug_pickle_path='train_data/aug_data26.pkl')
+ocr.model.plot_training()

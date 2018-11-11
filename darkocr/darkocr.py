@@ -9,7 +9,7 @@ class DarkOCR:
         self.data = ImageData()
         # reading data
         self.data.read_origin_data(pickle_path)
-        self.model = CNNModel(image_dim, image_dim, classes_count)
+        self.model = CNNModel(image_dim, image_dim, 26)
         print('Complete')
 
     def show_origin_data(self, char='p'):

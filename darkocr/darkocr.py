@@ -28,10 +28,15 @@ class DarkOCR:
     def augment_folder(self, path, char_i=None, generated_count=50):
         pixels_mean = None
         if char_i is not None:
+            path += '/' + str(char_i)
             pixels_mean_per_class = self.data.calc_pixels_mean()
             pixels_mean = pixels_mean_per_class[char_i]
 
         augment_folder(path, generated_count=generated_count, pixels_mean=pixels_mean)
+
+    def fit_from_aug_folder(self, path=png_path):
+        data_set = self.data.read_augmented_data_and_process(in_path=path, classes_count_int=4)
+        self.fit(data_set)
 
     def fit_from_aug_pickle(self, aug_pickle_path=augmented_pickle_path):
         data_set = self.data.read_pickle(aug_pickle_path)

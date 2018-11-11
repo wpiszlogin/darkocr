@@ -3,9 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="64bc8ad6-d65d-44cf-a438-5a39ad3e2218" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/darkocr/augment.py" beforeDir="false" afterPath="$PROJECT_DIR$/darkocr/augment.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/darkocr/darkocr.py" beforeDir="false" afterPath="$PROJECT_DIR$/darkocr/darkocr.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/darkocr/data.py" beforeDir="false" afterPath="$PROJECT_DIR$/darkocr/data.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/predict.py" beforeDir="false" afterPath="$PROJECT_DIR$/predict.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -41,17 +39,17 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="Python Console" value="6038" />
+          <entry key="Python Console" value="6074" />
           <entry key="dummy" value="5" />
           <entry key="md" value="9" />
-          <entry key="py" value="12412" />
+          <entry key="py" value="12618" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="Markdown" value="9" />
           <entry key="PLAIN_TEXT" value="5" />
-          <entry key="Python" value="18450" />
+          <entry key="Python" value="18692" />
         </counts>
       </usages-collector>
     </session>
@@ -61,11 +59,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/predict.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="32" lean-forward="true" selection-start-line="32" selection-end-line="32" />
+            <state relative-caret-position="351">
+              <caret line="23" selection-start-line="23" selection-end-line="26" />
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
-                <marker date="1541889423257" expanded="true" signature="101:102" ph="..." />
+                <marker date="1541893049407" expanded="true" signature="101:102" ph="..." />
               </folding>
             </state>
           </provider>
@@ -74,11 +72,12 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/darkocr/darkocr.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="442">
-              <caret line="35" column="19" selection-start-line="35" selection-start-column="19" selection-end-line="35" selection-end-column="19" />
+            <state relative-caret-position="321">
+              <caret line="36" column="27" selection-start-line="36" selection-start-column="8" selection-end-line="36" selection-end-column="27" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
-                <marker date="1541888879244" expanded="true" signature="1268:1274" ph="..." />
+                <marker date="1541892789478" expanded="true" signature="1197:1206" ph="..." />
+                <marker date="1541892789478" expanded="true" signature="1480:1486" ph="..." />
               </folding>
             </state>
           </provider>
@@ -87,8 +86,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/darkocr/data.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="126" column="43" selection-start-line="126" selection-start-column="8" selection-end-line="126" selection-end-column="43" />
+            <state relative-caret-position="174">
+              <caret line="11" column="8" selection-start-line="11" selection-end-line="11" selection-end-column="8" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
                 <marker date="1541887945242" expanded="true" signature="4192:4197" ph="..." />
@@ -100,8 +99,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/darkocr/model.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" selection-start-line="2" selection-end-line="2" />
+            <state relative-caret-position="306">
+              <caret line="18" column="49" selection-start-line="18" selection-start-column="49" selection-end-line="18" selection-end-column="49" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
                 <marker date="1541864890678" expanded="true" signature="125:1342" ph="..." />
@@ -188,11 +187,11 @@
         <option value="$PROJECT_DIR$/src/model.py" />
         <option value="$PROJECT_DIR$/src/darkocr.py" />
         <option value="$PROJECT_DIR$/README.md" />
-        <option value="$PROJECT_DIR$/darkocr/model.py" />
         <option value="$PROJECT_DIR$/darkocr/augment.py" />
         <option value="$PROJECT_DIR$/darkocr/data.py" />
         <option value="$PROJECT_DIR$/darkocr/darkocr.py" />
         <option value="$PROJECT_DIR$/predict.py" />
+        <option value="$PROJECT_DIR$/darkocr/model.py" />
       </list>
     </option>
   </component>
@@ -388,7 +387,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1696" height="1026" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13510254" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -473,21 +471,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/darkocr/model.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" selection-start-line="2" selection-end-line="2" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-            <marker date="1541864890678" expanded="true" signature="125:1342" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/darkocr/data.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="126" column="43" selection-start-line="126" selection-start-column="8" selection-end-line="126" selection-end-column="43" />
+        <state relative-caret-position="174">
+          <caret line="11" column="8" selection-start-line="11" selection-end-line="11" selection-end-column="8" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
             <marker date="1541887945242" expanded="true" signature="4192:4197" ph="..." />
@@ -497,22 +484,34 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/darkocr/darkocr.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="35" column="19" selection-start-line="35" selection-start-column="19" selection-end-line="35" selection-end-column="19" />
+        <state relative-caret-position="321">
+          <caret line="36" column="27" selection-start-line="36" selection-start-column="8" selection-end-line="36" selection-end-column="27" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
-            <marker date="1541888879244" expanded="true" signature="1268:1274" ph="..." />
+            <marker date="1541892789478" expanded="true" signature="1197:1206" ph="..." />
+            <marker date="1541892789478" expanded="true" signature="1480:1486" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/darkocr/model.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="18" column="49" selection-start-line="18" selection-start-column="49" selection-end-line="18" selection-end-column="49" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+            <marker date="1541864890678" expanded="true" signature="125:1342" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/predict.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="32" lean-forward="true" selection-start-line="32" selection-end-line="32" />
+        <state relative-caret-position="351">
+          <caret line="23" selection-start-line="23" selection-end-line="26" />
           <folding>
             <element signature="e#0#35#0" expanded="true" />
-            <marker date="1541889423257" expanded="true" signature="101:102" ph="..." />
+            <marker date="1541893049407" expanded="true" signature="101:102" ph="..." />
           </folding>
         </state>
       </provider>

@@ -1,7 +1,7 @@
-import matplotlib.pyplot as plt
 import time
+
+import matplotlib.pyplot as plt
 from tensorflow import keras
-from tensorflow.keras import optimizers
 from tensorflow.keras.layers import Conv2D, MaxPool2D, Flatten, Dropout, Dense, BatchNormalization, Activation
 
 
@@ -16,6 +16,7 @@ class CNNModel:
         # hyper parameters
         dropout = 0.2
         learning_rate = 0.002
+        self.epochs = 15
 
         # build convolution network model
         self.model = keras.Sequential()
@@ -52,7 +53,7 @@ class CNNModel:
     def fit(self, train_x, train_y, test_x, test_y):
         start_time = time.time()
         self.history = self.model.fit(train_x, train_y, batch_size=512, validation_data=(test_x, test_y),
-                                      epochs=20, verbose=1)
+                                      epochs=self.epochs, verbose=1)
         end_time = time.time()
         print('Training time: {} s'.format(int(end_time - start_time)))
 
@@ -77,3 +78,17 @@ class CNNModel:
         fig = plt.gcf()
         fig.canvas.set_window_title('Training plot')
         plt.show()
+
+    def save_model(self, path='models/', fold=None):
+        if fold is not None:
+            path += 'fold' + str(fold) + '/' + 'model.h5'
+        elif path == 'models/':
+            path += 'model.h5'
+        self.model.save(path)
+
+    def load_model(self, path='models/', fold=None):
+        if fold is not None:
+            path += 'fold' + str(fold) + '/' + 'model.h5'
+        elif path == 'models/':
+            path += 'model.h5'
+        self.model = keras.models.load_model(path)

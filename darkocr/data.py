@@ -1,11 +1,11 @@
 import os
 import operator
+import glob
 
 import pickle
 import numpy as np
 import matplotlib.pyplot as plt
 from PIL import Image
-import glob
 
 # data settings
 pickle_path = 'train_data/train.pkl'
@@ -59,6 +59,7 @@ class ImageData:
     @staticmethod
     def save_array_to_png(a, path):
         im = Image.fromarray(a*255)
+        im = im.convert("L")
         im.save(path)
 
     def save_data_set_to_png(self, path=png_path):
@@ -124,7 +125,7 @@ class ImageData:
         return a[p], b[p]
 
     # transform data to k-fold validation set, it prevents mix augmented images between training and testing set
-    def from_processed_data_to_training_set(self, data_set=None, test_fold=4, permutation=True):
+    def from_processed_data_to_training_set(self, data_set=None, test_fold=4, permutation=True, ignore_class=None):
         if data_set is None:
             print("\nCan't build training set. No data set!\n")
             return
@@ -139,21 +140,25 @@ class ImageData:
         fold = 0
         for label in range(classes_count_int):
             e_per_label_count = 0
-            for examp in data_set[label]:
-                for aug in examp:
-                    if fold == test_fold:
-                        test_list_x.append(aug)
-                        test_list_y.append(label)
+
+            if label == ignore_class:
+                print('Ignored class {}'.format(label))
+            else:
+                for examp in data_set[label]:
+                    for aug in examp:
+                        if fold == test_fold:
+                            test_list_x.append(aug)
+                            test_list_y.append(label)
+                        else:
+                            train_list_x.append(aug)
+                            train_list_y.append(label)
+
+                        e_per_label_count += 1
+
+                    if fold >= fold_count - 1:
+                        fold = 0
                     else:
-                        train_list_x.append(aug)
-                        train_list_y.append(label)
-
-                    e_per_label_count += 1
-
-                if fold >= fold_count - 1:
-                    fold = 0
-                else:
-                    fold += 1
+                        fold += 1
 
             print('Class {} has {} examples ({} was original)'.format(label, e_per_label_count, len(data_set[label])))
 
@@ -175,6 +180,32 @@ class ImageData:
 
         print('\nTraining set is complete\n')
         return (self.train_x, self.train_y), (self.test_x, self.test_y)
+
+    def mse(self, imageA, imageB):
+        err = np.sum((imageA.astype("float") - imageB.astype("float")) ** 2)
+        err /= float(imageA.shape[0] * imageA.shape[1])
+
+        return err
+
+    # validates if there are similar images in training and testing set, avoid overfitting
+    def find_similar_im_from_data_set(self, similar_threshold, intensity_threshold):
+        sample_counter = 0
+        for train_i in range(len(self.train_x)):
+            for test_i in range(len(self.test_x)):
+                # compare same labels
+                if self.train_y[train_i] == self.test_y[test_i]:
+                    tr_a = self.train_x[train_i]
+                    te_a = self.test_x[test_i]
+                    if self.mse(tr_a, te_a) < 1 - similar_threshold:
+                        print("{} podobne!".format(sample_counter))
+                        self.save_array_to_png(tr_a.reshape(image_dim, image_dim),
+                                               'test_data/similarity_test/{}_a.png'.format(sample_counter))
+                        self.save_array_to_png(te_a.reshape(image_dim, image_dim),
+                                               'test_data/similarity_test/{}_b.png'.format(sample_counter))
+                        sample_counter += 1
+
+            if train_i % 100 == 0:
+                print('progress: {}%'.format(int(100 * train_i / len(self.train_x))))
 
     # it can be use to validate small data set
     def show_training_set(self, cols_count=27, rows_count=10):

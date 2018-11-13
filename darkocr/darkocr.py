@@ -1,3 +1,6 @@
+import glob
+from PIL import Image
+
 from model import CNNModel
 from data import *
 from augment import *
@@ -9,7 +12,8 @@ class DarkOCR:
         self.data = ImageData()
         # reading data
         self.data.read_origin_data(pickle_path)
-        self.model = CNNModel(image_dim, image_dim, 26)
+        self.model = CNNModel(image_dim, image_dim, classes_count)
+        self.models_fold = [CNNModel(image_dim, image_dim, classes_count) for i in range(fold_count)]
         print('Complete')
 
     def show_origin_data(self, char='p'):
@@ -38,19 +42,71 @@ class DarkOCR:
         data_set = self.data.read_augmented_data_and_process(in_path=path, classes_count_int=4)
         self.fit(data_set)
 
-    def fit_from_aug_pickle(self, aug_pickle_path=augmented_pickle_path):
+    def fit_from_aug_pickle(self, aug_pickle_path=augmented_pickle_path, test_fold=4):
         data_set = self.data.read_pickle(aug_pickle_path)
-        self.fit(data_set)
+        self.fit(data_set, test_fold=test_fold)
 
-    def fit(self, data_set):
-        # single fold means standard cross-validation
-        test_fold = 4
-
+    def fit(self, data_set, test_fold=4):
         (train_x, train_y), (test_x, test_y) = self.data.from_processed_data_to_training_set(
             data_set=data_set,
-            test_fold=test_fold)
+            test_fold=test_fold,
+            ignore_class=30)
 
         self.model.fit(train_x, train_y, test_x, test_y)
 
+    def load_trained_models_group(self):
+        for fold in range(fold_count):
+            self.models_fold[fold].load_model(fold=fold)
+
     def predict(self, input_data):
-        return self.model.predict(input_data)
+        prediction = self.model.predict(input_data)
+        return np.argmax(prediction, axis=1)
+
+    def predict_from_fold(self, input_data, fold=4):
+        prediction = self.models_fold[fold].predict(input_data)
+        return np.argmax(prediction, axis=1)
+
+    def predict_from_group(self, input_data):
+        prediction_votes = np.zeros((len(input_data), classes_count))
+        for fold in range(fold_count):
+            prediction_votes += self.models_fold[fold].predict(input_data)
+
+        return np.argmax(prediction_votes, axis=1)
+
+    def predict_image(self, im, decode=False):
+        im = im.convert("L")
+        ia = np.array(im, dtype='d')
+
+        ia = ia / 255
+        ia = ia.reshape(-1, 56, 56, 1)
+        prediction = self.predict(ia)
+        if decode:
+            prediction = ImageData.decode(prediction[0])
+
+        return prediction
+
+    def evaluate_by_image_folder(self, path):
+        correct_count = 0
+        examples_count = 0
+
+        answers_counter = [0] * 36
+        correct_counter = [0] * 36
+
+        for im_path in glob.glob(path + '/*.png'):
+            hash_i = im_path.rfind("#")
+            label = im_path[hash_i + 1]
+
+            im = Image.open(im_path)
+            prediction = self.predict_image(im, decode=True)
+
+            if label == prediction:
+                correct_count += 1
+                correct_counter[ImageData.encode(label)] += 1
+
+            answers_counter[ImageData.encode(prediction)] += 1
+            examples_count += 1
+
+        print('Results: {:.2f}%'.format(100 * correct_count / examples_count))
+        for i in range(len(answers_counter)):
+            print('{} ({}). correct: {}, answers count: {}'.format(
+                i, ImageData.decode(i), correct_counter[i], answers_counter[i]))

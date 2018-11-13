@@ -1,9 +1,9 @@
 import random
+import numpy as np
 
 from PIL import Image, ImageFilter
 import Augmentor
 from Augmentor.Operations import Operation
-import numpy as np
 
 
 # below classes extends Augmentor

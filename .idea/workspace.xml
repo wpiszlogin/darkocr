@@ -2,13 +2,260 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="64bc8ad6-d65d-44cf-a438-5a39ad3e2218" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/samples.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/darkocr/augment.py" beforeDir="false" afterPath="$PROJECT_DIR$/darkocr/augment.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/darkocr/darkocr.py" beforeDir="false" afterPath="$PROJECT_DIR$/darkocr/darkocr.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/darkocr/data.py" beforeDir="false" afterPath="$PROJECT_DIR$/darkocr/data.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/darkocr/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/darkocr/model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/fold4/model.h5" beforeDir="false" afterPath="$PROJECT_DIR$/models/fold4/model.h5" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/predict.py" beforeDir="false" afterPath="$PROJECT_DIR$/predict.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/1#0.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/1#1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/1#2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/1#3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/1#4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/1#5.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/1#6.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/1#7.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/1#8.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/1#9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/1#A.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/1#B.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/1#C.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/1#D.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/1#E.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/1#F.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/1#G.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/1#H.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/1#I.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/1#J.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/1#K.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/1#L.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/1#M.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/1#N.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/1#O.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/1#P.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/1#Q.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/1#R.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/1#S.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/1#T.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/1#U.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/1#V.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/1#W.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/1#Y.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/1#Z.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/2#0.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/2#1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/2#2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/2#3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/2#4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/2#5.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/2#6.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/2#7.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/2#8.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/2#9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/2#A.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/2#B.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/2#C.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/2#D.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/2#E.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/2#F.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/2#G.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/2#H.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/2#I.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/2#J.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/2#K.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/2#L.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/2#M.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/2#N.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/2#O.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/2#P.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/2#Q.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/2#R.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/2#S.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/2#T.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/2#U.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/2#V.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/2#W.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/2#Y.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/2#Z.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/3#0.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/3#1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/3#2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/3#3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/3#4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/3#5.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/3#6.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/3#7.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/3#8.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/3#9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/3#A.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/3#B.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/3#C.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/3#D.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/3#E.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/3#F.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/3#G.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/3#H.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/3#I.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/3#K.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/3#L.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/3#M.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/3#N.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/3#O.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/3#P.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/3#Q.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/3#R.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/3#S.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/3#T.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/3#U.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/3#V.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/3#W.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/3#Y.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/3#Z.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/3#j.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/4#6.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/4#U.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/108samples/4#W.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/1#0.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/1#1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/1#2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/1#3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/1#4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/1#5.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/1#6 .png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/1#7.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/1#8.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/1#9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/1#A.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/1#B.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/1#C.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/1#D.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/1#E.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/1#F.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/1#G.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/1#H.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/1#I.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/1#J.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/1#K.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/1#L.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/1#M.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/1#N.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/1#O.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/1#P.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/1#Q.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/1#R.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/1#S.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/1#T.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/1#U.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/1#V.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/1#W.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/1#Y.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/1#Z.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/2#0.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/2#1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/2#2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/2#3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/2#4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/2#5.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/2#6.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/2#7.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/2#8.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/2#9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/2#A.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/2#B.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/2#C.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/2#D.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/2#E.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/2#F.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/2#G.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/2#H.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/2#I.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/2#J.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/2#K.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/2#L.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/2#M.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/2#N.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/2#O.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/2#P.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/2#Q.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/2#R.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/2#S.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/2#T.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/2#U.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/2#V.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/2#W.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/2#Y.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/2#Z.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/3#0.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/3#1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/3#2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/3#3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/3#4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/3#5.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/3#6.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/3#7.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/3#8.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/3#9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/3#A.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/3#B.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/3#C.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/3#D.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/3#E.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/3#F.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/3#G.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/3#H.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/3#I.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/3#K.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/3#L.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/3#M.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/3#N.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/3#O.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/3#P.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/3#Q.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/3#R.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/3#S.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/3#T.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/3#U.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/3#V.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/3#W.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/3#Y.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/3#Z.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/3#j.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/4#0.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/4#1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/4#2 .png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/4#3 .png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/4#4 a.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/4#5.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/4#6.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/4#7 .png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/4#8.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/4#9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/4#A.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/4#B.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/4#C.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/4#D.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/4#E.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/4#F.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/4#G.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/4#H.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/4#I.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/4#J.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/4#K.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/4#L.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/4#M.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/4#N.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/4#O.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/4#P.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/4#Q.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/4#R.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/4#S.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/4#T.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/4#U.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/4#V.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/4#W.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/4#Y.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/140samples/4xZ.png" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -31,29 +278,29 @@
         <counts>
           <entry key="LICENSE" value="1" />
           <entry key="md" value="2" />
-          <entry key="py" value="18" />
+          <entry key="py" value="19" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="Markdown" value="2" />
           <entry key="PLAIN_TEXT" value="1" />
-          <entry key="Python" value="18" />
+          <entry key="Python" value="19" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="Python Console" value="7468" />
+          <entry key="Python Console" value="7506" />
           <entry key="dummy" value="5" />
           <entry key="md" value="9" />
-          <entry key="py" value="16054" />
+          <entry key="py" value="16444" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="Markdown" value="9" />
           <entry key="PLAIN_TEXT" value="5" />
-          <entry key="Python" value="23522" />
+          <entry key="Python" value="23950" />
         </counts>
       </usages-collector>
     </session>
@@ -63,12 +310,21 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/predict.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="371">
-              <caret line="49" column="25" lean-forward="true" selection-start-line="49" selection-start-column="25" selection-end-line="49" selection-end-column="25" />
+            <state relative-caret-position="255">
+              <caret line="15" selection-start-line="15" selection-end-line="15" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
-                <marker date="1542076577495" expanded="true" signature="102:103" ph="..." />
+                <marker date="1542090796211" expanded="true" signature="102:103" ph="..." />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/samples.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="252">
+              <caret line="44" selection-start-line="44" selection-end-line="49" selection-end-column="42" />
             </state>
           </provider>
         </entry>
@@ -76,13 +332,13 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/darkocr/darkocr.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="383">
-              <caret line="54" column="20" lean-forward="true" selection-start-line="54" selection-start-column="20" selection-end-line="54" selection-end-column="20" />
+            <state relative-caret-position="255">
+              <caret line="15" column="28" lean-forward="true" selection-start-line="15" selection-start-column="28" selection-end-line="15" selection-end-column="100" />
               <folding>
                 <element signature="e#1#12#0" expanded="true" />
-                <marker date="1542077188759" expanded="true" signature="1334:1343" ph="..." />
-                <marker date="1542077188759" expanded="true" signature="1651:1657" ph="..." />
-                <marker date="1542077188759" expanded="true" signature="2490:2656" ph="..." />
+                <marker date="1542091121803" expanded="true" signature="1334:1343" ph="..." />
+                <marker date="1542091121803" expanded="true" signature="1651:1657" ph="..." />
+                <marker date="1542091121803" expanded="true" signature="2553:2719" ph="..." />
               </folding>
             </state>
           </provider>
@@ -91,8 +347,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/darkocr/data.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="366">
-              <caret line="60" column="35" lean-forward="true" selection-start-line="60" selection-start-column="35" selection-end-line="61" selection-end-column="28" />
+            <state relative-caret-position="1938">
+              <caret line="186" selection-start-line="186" selection-end-line="186" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
                 <marker date="1542073970946" expanded="true" signature="4221:4226" ph="..." />
@@ -105,11 +361,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/darkocr/model.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="242">
-              <caret line="56" column="30" lean-forward="true" selection-start-line="56" selection-start-column="30" selection-end-line="56" selection-end-column="30" />
+            <state relative-caret-position="323">
+              <caret line="22" selection-start-line="22" selection-end-line="22" />
               <folding>
                 <element signature="e#1#12#0" expanded="true" />
-                <marker date="1542041475526" expanded="true" signature="202:2242" ph="..." />
+                <marker date="1542089964987" expanded="true" signature="202:2243" ph="..." />
               </folding>
             </state>
           </provider>
@@ -118,8 +374,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/darkocr/augment.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-574">
-              <caret line="122" column="19" selection-start-line="122" selection-start-column="6" selection-end-line="122" selection-end-column="19" />
+            <state relative-caret-position="136">
+              <caret line="8" column="33" selection-start-line="8" selection-start-column="33" selection-end-line="8" selection-end-column="33" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
               </folding>
@@ -138,8 +394,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>read_augmented_d</find>
-      <find>read</find>
       <find>augm</find>
       <find>augment_path</find>
       <find>self.data</find>
@@ -161,13 +415,15 @@
       <find>save</find>
       <find>my</find>
       <find>models</find>
-      <find>blur</find>
       <find>ocr.</find>
       <find>fold</find>
       <find>predict</find>
       <find>glob</find>
       <find>pickl</find>
       <find>load</find>
+      <find>blur</find>
+      <find>group</find>
+      <find>140samples</find>
     </findStrings>
     <replaceStrings>
       <replace>image_dim</replace>
@@ -194,14 +450,15 @@
         <option value="$PROJECT_DIR$/src/darkocr.py" />
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/darkocr/augment.py" />
-        <option value="$PROJECT_DIR$/darkocr/model.py" />
         <option value="$PROJECT_DIR$/darkocr/data.py" />
+        <option value="$PROJECT_DIR$/darkocr/model.py" />
         <option value="$PROJECT_DIR$/predict.py" />
+        <option value="$PROJECT_DIR$/samples.py" />
         <option value="$PROJECT_DIR$/darkocr/darkocr.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="45" />
     <option name="y" value="-19" />
     <option name="width" value="1352" />
@@ -220,11 +477,6 @@
           <expand>
             <path>
               <item name="darkocr" type="b2602c69:ProjectViewProjectNode" />
-              <item name="darkocr" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="darkocr" type="b2602c69:ProjectViewProjectNode" />
-              <item name="darkocr" type="462c0819:PsiDirectoryNode" />
               <item name="darkocr" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -408,7 +660,7 @@
       <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.2174888" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50060314" side_tool="true" weight="0.15246637" />
-      <window_info active="true" anchor="bottom" id="Python Console" order="10" sideWeight="0.49939686" visible="true" weight="0.32399103" />
+      <window_info active="true" anchor="bottom" id="Python Console" order="10" sideWeight="0.49939686" visible="true" weight="0.36210763" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -494,42 +746,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/darkocr/augment.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-574">
-          <caret line="122" column="19" selection-start-line="122" selection-start-column="6" selection-end-line="122" selection-end-column="19" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/predict.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="371">
-          <caret line="49" column="25" lean-forward="true" selection-start-line="49" selection-start-column="25" selection-end-line="49" selection-end-column="25" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-            <marker date="1542076577495" expanded="true" signature="102:103" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/darkocr/model.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="56" column="30" lean-forward="true" selection-start-line="56" selection-start-column="30" selection-end-line="56" selection-end-column="30" />
-          <folding>
-            <element signature="e#1#12#0" expanded="true" />
-            <marker date="1542041475526" expanded="true" signature="202:2242" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/darkocr/data.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="366">
-          <caret line="60" column="35" lean-forward="true" selection-start-line="60" selection-start-column="35" selection-end-line="61" selection-end-column="28" />
+        <state relative-caret-position="1938">
+          <caret line="186" selection-start-line="186" selection-end-line="186" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
             <marker date="1542073970946" expanded="true" signature="4221:4226" ph="..." />
@@ -538,15 +758,54 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/darkocr/darkocr.py">
+    <entry file="file://$PROJECT_DIR$/darkocr/model.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="383">
-          <caret line="54" column="20" lean-forward="true" selection-start-line="54" selection-start-column="20" selection-end-line="54" selection-end-column="20" />
+        <state relative-caret-position="323">
+          <caret line="22" selection-start-line="22" selection-end-line="22" />
           <folding>
             <element signature="e#1#12#0" expanded="true" />
-            <marker date="1542077188759" expanded="true" signature="1334:1343" ph="..." />
-            <marker date="1542077188759" expanded="true" signature="1651:1657" ph="..." />
-            <marker date="1542077188759" expanded="true" signature="2490:2656" ph="..." />
+            <marker date="1542089964987" expanded="true" signature="202:2243" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/darkocr/augment.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="33" selection-start-line="8" selection-start-column="33" selection-end-line="8" selection-end-column="33" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/predict.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" selection-start-line="15" selection-end-line="15" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+            <marker date="1542090796211" expanded="true" signature="102:103" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/samples.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="44" selection-start-line="44" selection-end-line="49" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/darkocr/darkocr.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" column="28" lean-forward="true" selection-start-line="15" selection-start-column="28" selection-end-line="15" selection-end-column="100" />
+          <folding>
+            <element signature="e#1#12#0" expanded="true" />
+            <marker date="1542091121803" expanded="true" signature="1334:1343" ph="..." />
+            <marker date="1542091121803" expanded="true" signature="1651:1657" ph="..." />
+            <marker date="1542091121803" expanded="true" signature="2553:2719" ph="..." />
           </folding>
         </state>
       </provider>

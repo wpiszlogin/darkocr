@@ -55,8 +55,10 @@ class DarkOCR:
         self.model.fit(train_x, train_y, test_x, test_y)
 
     def load_trained_models_group(self):
+        print('Loading models group...')
         for fold in range(fold_count):
             self.models_fold[fold].load_model(fold=fold)
+        print('Done')
 
     def predict(self, input_data):
         prediction = self.model.predict(input_data)
@@ -78,8 +80,8 @@ class DarkOCR:
         ia = np.array(im, dtype='d')
 
         ia = ia / 255
-        ia = ia.reshape(-1, 56, 56, 1)
-        prediction = self.predict(ia)
+        ia = ia.reshape(-1, image_dim, image_dim, 1)
+        prediction = self.predict_from_group(ia)
         if decode:
             prediction = ImageData.decode(prediction[0])
 
@@ -89,8 +91,8 @@ class DarkOCR:
         correct_count = 0
         examples_count = 0
 
-        answers_counter = [0] * 36
-        correct_counter = [0] * 36
+        answers_counter = [0] * classes_count
+        correct_counter = [0] * classes_count
 
         for im_path in glob.glob(path + '/*.png'):
             hash_i = im_path.rfind("#")
@@ -106,7 +108,9 @@ class DarkOCR:
             answers_counter[ImageData.encode(prediction)] += 1
             examples_count += 1
 
-        print('Results: {:.2f}%'.format(100 * correct_count / examples_count))
+        accuracy = 100 * correct_count / examples_count
+        print('Results: {:.2f}%'.format(accuracy))
         for i in range(len(answers_counter)):
             print('{} ({}). correct: {}, answers count: {}'.format(
                 i, ImageData.decode(i), correct_counter[i], answers_counter[i]))
+        return accuracy

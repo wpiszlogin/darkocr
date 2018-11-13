@@ -14,9 +14,9 @@ class CNNModel:
         self.history = None
 
         # hyper parameters
-        dropout = 0.2
-        learning_rate = 0.002
-        self.epochs = 15
+        dropout = 0.25
+        learning_rate = 0.005
+        self.epochs = 10
 
         # build convolution network model
         self.model = keras.Sequential()
@@ -28,20 +28,20 @@ class CNNModel:
         self.model.add(MaxPool2D(pool_size=(2, 2)))
         self.model.add(Dropout(dropout))
 
-        self.model.add(Conv2D(32, kernel_size=(3, 3), padding='same', use_bias=False))
+        self.model.add(Conv2D(64, kernel_size=(3, 3), padding='same', use_bias=False))
         self.model.add(BatchNormalization())
         self.model.add(Activation("relu"))
         self.model.add(MaxPool2D(pool_size=(2, 2)))
         self.model.add(Dropout(dropout))
 
-        self.model.add(Conv2D(32, kernel_size=(3, 3), padding='same', use_bias=False))
+        self.model.add(Conv2D(64, kernel_size=(3, 3), padding='same', use_bias=False))
         self.model.add(BatchNormalization())
         self.model.add(Activation("relu"))
         self.model.add(MaxPool2D(pool_size=(2, 2)))
         self.model.add(Dropout(dropout))
 
         self.model.add(Flatten())
-        self.model.add(Dense(32, use_bias=False))
+        self.model.add(Dense(64, use_bias=False))
         self.model.add(BatchNormalization())
         self.model.add(Activation("relu"))
         self.model.add(Dropout(dropout))
@@ -53,7 +53,7 @@ class CNNModel:
     def fit(self, train_x, train_y, test_x, test_y):
         start_time = time.time()
         self.history = self.model.fit(train_x, train_y, batch_size=512, validation_data=(test_x, test_y),
-                                      epochs=self.epochs, verbose=1)
+                                      epochs=self.epochs, verbose=2)
         end_time = time.time()
         print('Training time: {} s'.format(int(end_time - start_time)))
 

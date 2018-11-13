@@ -69,6 +69,7 @@ class DarkOCR:
         return np.argmax(prediction, axis=1)
 
     def predict_from_group(self, input_data):
+        print('Making prediction...')
         prediction_votes = np.zeros((len(input_data), classes_count))
         for fold in range(fold_count):
             prediction_votes += self.models_fold[fold].predict(input_data)

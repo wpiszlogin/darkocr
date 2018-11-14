@@ -1,6 +1,8 @@
 # darkocr
 OCR application for handwritten characters. It uses a dark force of machine learning.
 
+![przyklady3](https://user-images.githubusercontent.com/6407844/48489739-febb7e80-e823-11e8-8786-9324800839fd.png)
+
 ## Dependencies
 * numpy
 * pickle
@@ -16,6 +18,8 @@ The biggest problem was with the unbalanced classes. That is why working on data
 * autocrop and autocenter image
 * smoothing edges of symbols after deformations
 
+![augment_pic](https://user-images.githubusercontent.com/6407844/48491254-69ba8480-e827-11e8-9f41-a8ffd4ccf2ca.png)
+
 The variety of generated images was satisfactory, thus it was decided to setup amount of examples to the largest class set.  
 The augmentation can cause overfitting, much attention was given not to mix augmented and original image between training and testing set.  
 Another problem was with the duplication of N letter. It was decided to delete single-element class 30 from the training data and not pollute the model. The class was not added to second N-class, because this set is the largest, so it would not impact on the performance. If there is a need to detect single N image, it will be easy to implement additional algorithm, which will compare values of two matrices.  
@@ -28,3 +32,6 @@ The problem requires predicting one out of 36 characters. There is no informatio
 Since k-fold method was used with k=5, thus the whole data was used for training and evaluation. Average accuracy of validation data set was 0,9248. Max was 0.9341.  
 The classification of some symbols (e.g. o and 0) is hard even for a human, therefore it was not expected to achieve accuracy near to 1. Considering this fact, received results are acceptable. It is good to notice, that some classes have from 100 to 200 examples and even perfect augmentation will not reconstruct variation of the handwritten characters. Letters can be written in many different style. The conclusion is that the model will not achieve measured accuracy in real world application. Similar effectiveness should be reached if letters were in upper case and legible.  
 Additionally, final model was tested by self-made examples. 140 images were created on a graphics tablet. Average accuracy was 0,8957. By using voting of 5 models (k-fold) the accuracy improved to 0.9214.  
+
+![test_pic](https://user-images.githubusercontent.com/6407844/48491503-05e48b80-e828-11e8-849f-de1379cf3f5c.png)
+

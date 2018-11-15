@@ -74,6 +74,7 @@ class CNNModel:
         plt.legend()
 
         plt.xlim([0, max(self.history.epoch)])
+        plt.title('Loss curve')
 
         fig = plt.gcf()
         fig.canvas.set_window_title('Training plot')

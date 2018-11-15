@@ -69,7 +69,7 @@ class DarkOCR:
         return np.argmax(prediction, axis=1)
 
     def predict_from_group(self, input_data):
-        print('Making prediction...')
+        # print('Making prediction...')
         prediction_votes = np.zeros((len(input_data), classes_count))
         for fold in range(fold_count):
             prediction_votes += self.models_fold[fold].predict(input_data)
@@ -105,6 +105,8 @@ class DarkOCR:
             if label == prediction:
                 correct_count += 1
                 correct_counter[ImageData.encode(label)] += 1
+            else:
+                print("WRONG!: {}, LABEL: {}, PREDICTION: {}".format(im_path, label, prediction))
 
             answers_counter[ImageData.encode(prediction)] += 1
             examples_count += 1

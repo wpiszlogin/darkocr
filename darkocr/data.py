@@ -307,11 +307,11 @@ class ImageData:
 
     def show_origin_data_histogram(self):
         plt.figure(figsize=(12, 4))
-        plt.hist(self.origin_y, bins=range(classes_count + 1), edgecolor='black', facecolor='blue', align='left')
+        plt.hist(self.origin_y, bins=range(classes_count + 1), edgecolor='white', facecolor='black', align='left')
         plt.xticks(range(classes_count))
         plt.xlabel('Labels')
         plt.ylabel('Count')
-        plt.title('Histogram of data set')
+        plt.title('Histogram of character data set')
         fig = plt.gcf()
         fig.canvas.set_window_title('Histogram of data set')
         plt.show()

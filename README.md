@@ -35,7 +35,7 @@ Learning was stopped after 10 epoches. The value was chosen by analyzing the lea
 
 ## Validation
 The problem requires predicting one out of 36 characters. There is no information about priority of them, therefore it was assumed they have the same importance.  
-Since k-fold method was used with k=5, thus the whole data was used for training and evaluation. Average accuracy of validation data set was __0,9248__. Max was __0.9341__.  
+Since k-fold method was used with k=5, thus the whole data was used for training and evaluation. Average accuracy of validation data set was __0.9248__. Max was __0.9341__.  
 The classification of some symbols (e.g. o and 0) is hard even for a human, therefore it was not expected to achieve accuracy near to 1. Considering this fact, received results are acceptable. It is good to notice, that some classes have from 100 to 200 examples and even perfect augmentation will not reconstruct variation of the handwritten characters. Letters can be written in many different style. The conclusion is that the model will not achieve measured accuracy in real world application. The lack of lower case examples is too big.
 Additionally, final model was tested by self-made examples. 140 images were created on a graphics tablet. Average accuracy was 0,8957. By using voting of 5 models (k-fold) the accuracy improved to __0.9286__.  
 

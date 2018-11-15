@@ -12,7 +12,11 @@ OCR application for handwritten characters. It uses a dark force of machine lear
 * Augmentor
 
 ## Solution
-The biggest problem was with the unbalanced classes. That is why working on data had the highest priority. Augmentor library was used for augmentation but the results were unsatisfactory. The characters in the dataset are centered and fit to image boundary, so only some of deformations could be used. However the library allows to extend it. Augmentor was enriched with a few author’s algorithms:
+The biggest problem was with the unbalanced classes. That is why working on data had the highest priority. 
+
+![histogram](https://user-images.githubusercontent.com/6407844/48527758-8210ba80-e88c-11e8-8126-928bcc16e990.png)
+
+Augmentor library was used for augmentation but the results were unsatisfactory. The characters in the dataset are centered and fit to image boundary, so only some of deformations could be used. However the library allows to extend it. Augmentor was enriched with a few author’s algorithms:
 * changing thickness of the line by erosion and dilation
 * making variations of aspect ratio only for automatically selected characters - where this has a positive effect  
 * autocrop and autocenter image
@@ -27,11 +31,12 @@ Some of the classes have small number of examples and the decision about losing 
 The model is the CNN and consists of three convolution layers and two fully-connected layers. Noticeably improvement in performance and learning speed could be achieved by using batch normalization. It is known that batch normalization has regularization effect, but to make it better drop out layers was added also. Nadam optimizer with learning rate 0.005 was chosen in the experimental way.  
 Learning was stopped after 10 epoches. The value was chosen by analyzing the learning graph. It was possible to get a little higher validation accuracy but It was assumed that many training iteration will cause more overfitting in external data set.  
 
+![uczenie](https://user-images.githubusercontent.com/6407844/48528321-a8cff080-e88e-11e8-9d2e-94b94aa26bcb.png)
+
 ## Validation
 The problem requires predicting one out of 36 characters. There is no information about priority of them, therefore it was assumed they have the same importance.  
-Since k-fold method was used with k=5, thus the whole data was used for training and evaluation. Average accuracy of validation data set was 0,9248. Max was 0.9341.  
-The classification of some symbols (e.g. o and 0) is hard even for a human, therefore it was not expected to achieve accuracy near to 1. Considering this fact, received results are acceptable. It is good to notice, that some classes have from 100 to 200 examples and even perfect augmentation will not reconstruct variation of the handwritten characters. Letters can be written in many different style. The conclusion is that the model will not achieve measured accuracy in real world application. Similar effectiveness should be reached if letters were in upper case and legible.  
-Additionally, final model was tested by self-made examples. 140 images were created on a graphics tablet. Average accuracy was 0,8957. By using voting of 5 models (k-fold) the accuracy improved to 0.9214.  
+Since k-fold method was used with k=5, thus the whole data was used for training and evaluation. Average accuracy of validation data set was __0,9248__. Max was __0.9341__.  
+The classification of some symbols (e.g. o and 0) is hard even for a human, therefore it was not expected to achieve accuracy near to 1. Considering this fact, received results are acceptable. It is good to notice, that some classes have from 100 to 200 examples and even perfect augmentation will not reconstruct variation of the handwritten characters. Letters can be written in many different style. The conclusion is that the model will not achieve measured accuracy in real world application. The lack of lower case examples is too big.
+Additionally, final model was tested by self-made examples. 140 images were created on a graphics tablet. Average accuracy was 0,8957. By using voting of 5 models (k-fold) the accuracy improved to __0.9286__.  
 
-![test_pic](https://user-images.githubusercontent.com/6407844/48491673-5fe55100-e828-11e8-82c6-e6dda7d57693.png)
-
+![validation dark](https://user-images.githubusercontent.com/6407844/48527597-0d3d8080-e88c-11e8-8937-572a89a03cda.png)

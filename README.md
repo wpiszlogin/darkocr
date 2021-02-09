@@ -28,6 +28,9 @@ The variety of generated images was satisfactory, thus it was decided to setup a
 The augmentation can cause overfitting, much attention was given not to mix augmented and original image between training and testing set.  
 Another problem was with the duplication of N letter. It was decided to delete single-element class 30 from the training data and not pollute the model. The class was not added to second N-class, because this set is the largest, so it would not impact on the performance. If there is a need to detect single N image, it will be easy to implement additional algorithm, which will compare values of two matrices.  
 Some of the classes have small number of examples and the decision about losing them for the validation was hard. That is why k-fold cross validation was used. There were five combinations of subsets for training and testing and five models were created. Final result is made by voting.  
+
+## Model
+![model_darkocr_small](https://user-images.githubusercontent.com/6407844/107306223-cf3c6080-6a84-11eb-9aad-e790d7de3fcc.png)
 The model is the CNN and consists of three convolution layers and two fully-connected layers. Noticeably improvement in performance and learning speed could be achieved by using batch normalization. It is known that batch normalization has regularization effect, but to make it better drop out layers was added also. Nadam optimizer with learning rate 0.005 was chosen in the experimental way.  
 Learning was stopped after 10 epoches. The value was chosen by analyzing the learning graph. It was possible to get a little higher validation accuracy but It was assumed that many training iteration will cause more overfitting in external data set.  
 

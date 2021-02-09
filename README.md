@@ -30,8 +30,9 @@ Another problem was with the duplication of N letter. It was decided to delete s
 Some of the classes have small number of examples and the decision about losing them for the validation was hard. That is why k-fold cross validation was used. There were five combinations of subsets for training and testing and five models were created. Final result is made by voting.  
 
 ## Model
-![model_darkocr_small](https://user-images.githubusercontent.com/6407844/107306223-cf3c6080-6a84-11eb-9aad-e790d7de3fcc.png)
-The model is the CNN and consists of three convolution layers and two fully-connected layers. Noticeably improvement in performance and learning speed could be achieved by using batch normalization. It is known that batch normalization has regularization effect, but to make it better drop out layers was added also. Nadam optimizer with learning rate 0.005 was chosen in the experimental way.  
+The model is the CNN and consists of three convolution layers and two fully-connected layers. 
+![model_darkocr](https://user-images.githubusercontent.com/6407844/107306653-8df88080-6a85-11eb-9d3a-ead0b7b7273f.png)
+Noticeably improvement in performance and learning speed could be achieved by using batch normalization. It is known that batch normalization has regularization effect, but to make it better drop out layers was added also. Nadam optimizer with learning rate 0.005 was chosen in the experimental way.  
 Learning was stopped after 10 epoches. The value was chosen by analyzing the learning graph. It was possible to get a little higher validation accuracy but It was assumed that many training iteration will cause more overfitting in external data set.  
 
 ![uczenie](https://user-images.githubusercontent.com/6407844/48528321-a8cff080-e88e-11e8-9d2e-94b94aa26bcb.png)
